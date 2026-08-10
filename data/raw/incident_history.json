@@ -1,0 +1,3447 @@
+{
+  "data": {
+    "period_days": 90,
+    "rows": [
+      {
+        "day": "2026-07-23",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 159,
+        "reports_down": 184,
+        "reports_up": 206
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 61,
+        "reports_down": 73,
+        "reports_up": 95
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 26,
+        "reports_down": 27,
+        "reports_up": 24
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 7,
+        "reports_down": 7,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 22,
+        "reports_down": 22,
+        "reports_up": 41
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 74,
+        "reports_down": 81,
+        "reports_up": 104
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 27,
+        "reports_down": 29,
+        "reports_up": 38
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 15,
+        "reports_down": 16,
+        "reports_up": 27
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 79,
+        "reports_down": 83,
+        "reports_up": 79
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 6,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 12,
+        "reports_down": 13,
+        "reports_up": 13
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 0
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-23",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 0
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 68,
+        "reports_down": 76,
+        "reports_up": 120
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 52,
+        "reports_down": 55,
+        "reports_up": 76
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 61,
+        "reports_down": 66,
+        "reports_up": 96
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 21,
+        "reports_up": 14
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 24,
+        "reports_up": 31
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 23,
+        "reports_up": 51
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 15,
+        "reports_down": 15,
+        "reports_up": 36
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 6,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 12,
+        "reports_down": 12,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 7,
+        "reports_down": 7,
+        "reports_up": 14
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-07-24",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 0
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 817,
+        "reports_down": 1024,
+        "reports_up": 1118
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 1612,
+        "reports_down": 3264,
+        "reports_up": 2855
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 233,
+        "reports_down": 270,
+        "reports_up": 453
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 532,
+        "reports_down": 571,
+        "reports_up": 934
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 238,
+        "reports_down": 283,
+        "reports_up": 318
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 681,
+        "reports_down": 1126,
+        "reports_up": 1320
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 203,
+        "reports_down": 216,
+        "reports_up": 293
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 56,
+        "reports_down": 59,
+        "reports_up": 109
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 1385,
+        "reports_down": 2147,
+        "reports_up": 2004
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 570,
+        "reports_down": 641,
+        "reports_up": 602
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 143,
+        "reports_down": 153,
+        "reports_up": 211
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 430,
+        "reports_down": 449,
+        "reports_up": 648
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 63,
+        "reports_down": 70,
+        "reports_up": 85
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 854,
+        "reports_down": 1424,
+        "reports_up": 1128
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 40,
+        "reports_down": 40,
+        "reports_up": 74
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 41,
+        "reports_down": 42,
+        "reports_up": 83
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 75,
+        "reports_down": 76,
+        "reports_up": 123
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 66,
+        "reports_down": 67,
+        "reports_up": 117
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 72,
+        "reports_down": 74,
+        "reports_up": 125
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 140,
+        "reports_down": 145,
+        "reports_up": 167
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 77,
+        "reports_down": 112,
+        "reports_up": 127
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 59,
+        "reports_down": 60,
+        "reports_up": 74
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 50,
+        "reports_down": 55,
+        "reports_up": 87
+      },
+      {
+        "day": "2026-07-25",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 25,
+        "reports_down": 26,
+        "reports_up": 52
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 1591,
+        "reports_down": 2966,
+        "reports_up": 3043
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 453,
+        "reports_down": 494,
+        "reports_up": 831
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 175,
+        "reports_down": 180,
+        "reports_up": 302
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 1106,
+        "reports_down": 1530,
+        "reports_up": 1522
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 551,
+        "reports_down": 606,
+        "reports_up": 613
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 785,
+        "reports_down": 1118,
+        "reports_up": 1209
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 1244,
+        "reports_down": 1732,
+        "reports_up": 1730
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 624,
+        "reports_down": 988,
+        "reports_up": 1492
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 106,
+        "reports_down": 107,
+        "reports_up": 146
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 39,
+        "reports_down": 43,
+        "reports_up": 90
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 266,
+        "reports_down": 287,
+        "reports_up": 607
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 34,
+        "reports_down": 35,
+        "reports_up": 75
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 239,
+        "reports_down": 263,
+        "reports_up": 475
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 38,
+        "reports_down": 38,
+        "reports_up": 79
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 30,
+        "reports_down": 30,
+        "reports_up": 83
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 76,
+        "reports_down": 79,
+        "reports_up": 133
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 47,
+        "reports_down": 47,
+        "reports_up": 101
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 144,
+        "reports_down": 157,
+        "reports_up": 267
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 180,
+        "reports_down": 192,
+        "reports_up": 229
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 56,
+        "reports_down": 56,
+        "reports_up": 96
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 35,
+        "reports_down": 39,
+        "reports_up": 58
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 47,
+        "reports_down": 50,
+        "reports_up": 62
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 48,
+        "reports_down": 62,
+        "reports_up": 99
+      },
+      {
+        "day": "2026-07-26",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 50,
+        "reports_down": 52,
+        "reports_up": 87
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 358,
+        "reports_down": 398,
+        "reports_up": 818
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 265,
+        "reports_down": 277,
+        "reports_up": 988
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 103,
+        "reports_down": 105,
+        "reports_up": 423
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 45,
+        "reports_down": 46,
+        "reports_up": 132
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 471,
+        "reports_down": 525,
+        "reports_up": 1763
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 43,
+        "reports_down": 43,
+        "reports_up": 182
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 124,
+        "reports_down": 142,
+        "reports_up": 305
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 27,
+        "reports_down": 27,
+        "reports_up": 81
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 196,
+        "reports_down": 210,
+        "reports_up": 517
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 200,
+        "reports_down": 246,
+        "reports_up": 722
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 30,
+        "reports_down": 31,
+        "reports_up": 90
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 393,
+        "reports_down": 497,
+        "reports_up": 1059
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 36,
+        "reports_down": 36,
+        "reports_up": 187
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 18,
+        "reports_down": 19,
+        "reports_up": 56
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 28,
+        "reports_down": 28,
+        "reports_up": 59
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 37,
+        "reports_down": 52,
+        "reports_up": 64
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 277,
+        "reports_down": 292,
+        "reports_up": 415
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 29,
+        "reports_down": 29,
+        "reports_up": 72
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 14,
+        "reports_down": 15,
+        "reports_up": 49
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 36,
+        "reports_down": 37,
+        "reports_up": 42
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 26
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 13,
+        "reports_down": 13,
+        "reports_up": 43
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 15,
+        "reports_down": 15,
+        "reports_up": 26
+      },
+      {
+        "day": "2026-07-27",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 14,
+        "reports_down": 14,
+        "reports_up": 39
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 26,
+        "reports_down": 26,
+        "reports_up": 116
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 256,
+        "reports_down": 288,
+        "reports_up": 1119
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 111,
+        "reports_down": 115,
+        "reports_up": 474
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 113,
+        "reports_down": 121,
+        "reports_up": 421
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 218,
+        "reports_down": 259,
+        "reports_up": 636
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 306,
+        "reports_down": 360,
+        "reports_up": 683
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 63,
+        "reports_down": 67,
+        "reports_up": 273
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 12,
+        "reports_down": 12,
+        "reports_up": 66
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 31
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 193,
+        "reports_down": 195,
+        "reports_up": 306
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 16,
+        "reports_down": 16,
+        "reports_up": 50
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 75,
+        "reports_down": 91,
+        "reports_up": 248
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 31,
+        "reports_down": 37,
+        "reports_up": 197
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 33,
+        "reports_down": 37,
+        "reports_up": 107
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 10,
+        "reports_down": 10,
+        "reports_up": 30
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 34
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 7,
+        "reports_down": 7,
+        "reports_up": 30
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 10,
+        "reports_down": 10,
+        "reports_up": 22
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 12,
+        "reports_down": 12,
+        "reports_up": 26
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 25
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 19
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 43
+      },
+      {
+        "day": "2026-07-28",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 11,
+        "reports_down": 11,
+        "reports_up": 18
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 175,
+        "reports_down": 187,
+        "reports_up": 758
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 55,
+        "reports_down": 57,
+        "reports_up": 224
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 15,
+        "reports_down": 15,
+        "reports_up": 77
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 55,
+        "reports_down": 58,
+        "reports_up": 153
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 165,
+        "reports_down": 197,
+        "reports_up": 353
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 188,
+        "reports_down": 209,
+        "reports_up": 510
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 100,
+        "reports_down": 108,
+        "reports_up": 410
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 67,
+        "reports_down": 82,
+        "reports_up": 306
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 30,
+        "reports_down": 32,
+        "reports_up": 79
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 19,
+        "reports_up": 160
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 23
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 12
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 10
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 24,
+        "reports_up": 108
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 30
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 24
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 26
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 7,
+        "reports_down": 7,
+        "reports_up": 14
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 12
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 14
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 36
+      },
+      {
+        "day": "2026-07-29",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 12
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 243,
+        "reports_down": 322,
+        "reports_up": 492
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 461,
+        "reports_down": 555,
+        "reports_up": 438
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 398,
+        "reports_down": 547,
+        "reports_up": 611
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 16,
+        "reports_down": 16,
+        "reports_up": 32
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 79,
+        "reports_down": 79,
+        "reports_up": 139
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 164,
+        "reports_down": 176,
+        "reports_up": 252
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 13
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 247,
+        "reports_down": 298,
+        "reports_up": 341
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 22,
+        "reports_down": 22,
+        "reports_up": 65
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 661,
+        "reports_down": 1043,
+        "reports_up": 990
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 26,
+        "reports_down": 27,
+        "reports_up": 63
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 46,
+        "reports_down": 47,
+        "reports_up": 46
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 69,
+        "reports_down": 81,
+        "reports_up": 107
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 15,
+        "reports_down": 15,
+        "reports_up": 21
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 227,
+        "reports_down": 261,
+        "reports_up": 196
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 22,
+        "reports_down": 24,
+        "reports_up": 20
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 18
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 12
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 13,
+        "reports_down": 13,
+        "reports_up": 12
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 18,
+        "reports_down": 19,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 8
+      },
+      {
+        "day": "2026-07-30",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 22,
+        "reports_up": 31
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 324,
+        "reports_down": 397,
+        "reports_up": 625
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 174,
+        "reports_down": 186,
+        "reports_up": 197
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 39
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 28,
+        "reports_down": 28,
+        "reports_up": 92
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 75,
+        "reports_down": 80,
+        "reports_up": 218
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 157,
+        "reports_down": 183,
+        "reports_up": 383
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 76,
+        "reports_down": 79,
+        "reports_up": 299
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 45,
+        "reports_down": 45,
+        "reports_up": 152
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 60,
+        "reports_down": 65,
+        "reports_up": 203
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 17,
+        "reports_down": 17,
+        "reports_up": 69
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 16,
+        "reports_down": 16,
+        "reports_up": 38
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 13
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 8
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 8
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 10
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 11,
+        "reports_down": 11,
+        "reports_up": 22
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-07-31",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 89,
+        "reports_down": 93,
+        "reports_up": 431
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 87,
+        "reports_down": 88,
+        "reports_up": 214
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 61,
+        "reports_down": 61,
+        "reports_up": 116
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 113,
+        "reports_down": 120,
+        "reports_up": 244
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 91,
+        "reports_down": 101,
+        "reports_up": 122
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 29
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 70,
+        "reports_down": 73,
+        "reports_up": 171
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 72,
+        "reports_down": 74,
+        "reports_up": 164
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 25,
+        "reports_down": 25,
+        "reports_up": 78
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 24,
+        "reports_up": 40
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 23
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 24,
+        "reports_up": 57
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 12
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 15
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-01",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 17,
+        "reports_down": 17,
+        "reports_up": 61
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 9
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 10
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 8
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 17
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 26
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 64,
+        "reports_down": 64,
+        "reports_up": 154
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 87,
+        "reports_down": 88,
+        "reports_up": 217
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 54,
+        "reports_down": 55,
+        "reports_up": 89
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 81,
+        "reports_down": 98,
+        "reports_up": 188
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 149,
+        "reports_down": 166,
+        "reports_up": 387
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 40
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 28,
+        "reports_up": 46
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 105,
+        "reports_down": 116,
+        "reports_up": 249
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-02",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 31,
+        "reports_down": 31,
+        "reports_up": 129
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 1334,
+        "reports_down": 2994,
+        "reports_up": 2018
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 388,
+        "reports_down": 451,
+        "reports_up": 397
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 538,
+        "reports_down": 621,
+        "reports_up": 442
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 308,
+        "reports_down": 350,
+        "reports_up": 268
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 461,
+        "reports_down": 1035,
+        "reports_up": 937
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 951,
+        "reports_down": 1336,
+        "reports_up": 883
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 566,
+        "reports_down": 845,
+        "reports_up": 621
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 261,
+        "reports_down": 379,
+        "reports_up": 258
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 163,
+        "reports_down": 167,
+        "reports_up": 149
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 953,
+        "reports_down": 1422,
+        "reports_up": 984
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 19,
+        "reports_up": 24
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 166,
+        "reports_down": 175,
+        "reports_up": 153
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 64,
+        "reports_down": 98,
+        "reports_up": 42
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 39,
+        "reports_down": 39,
+        "reports_up": 34
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 79,
+        "reports_down": 79,
+        "reports_up": 46
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 12,
+        "reports_down": 12,
+        "reports_up": 17
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 40,
+        "reports_down": 46,
+        "reports_up": 27
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 160,
+        "reports_down": 171,
+        "reports_up": 121
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 18,
+        "reports_down": 19,
+        "reports_up": 28
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 19,
+        "reports_up": 36
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 14,
+        "reports_down": 15,
+        "reports_up": 33
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 54,
+        "reports_down": 58,
+        "reports_up": 45
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 34,
+        "reports_down": 35,
+        "reports_up": 27
+      },
+      {
+        "day": "2026-08-03",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 7,
+        "reports_down": 7,
+        "reports_up": 17
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 592,
+        "reports_down": 827,
+        "reports_up": 650
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 558,
+        "reports_down": 965,
+        "reports_up": 889
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 393,
+        "reports_down": 432,
+        "reports_up": 404
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 586,
+        "reports_down": 710,
+        "reports_up": 666
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 1129,
+        "reports_down": 1851,
+        "reports_up": 1622
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 156,
+        "reports_down": 170,
+        "reports_up": 252
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 243,
+        "reports_down": 269,
+        "reports_up": 240
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 60,
+        "reports_down": 61,
+        "reports_up": 107
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 1101,
+        "reports_down": 1540,
+        "reports_up": 1070
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 162,
+        "reports_down": 193,
+        "reports_up": 188
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 100,
+        "reports_down": 103,
+        "reports_up": 102
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 29,
+        "reports_down": 29,
+        "reports_up": 36
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 79,
+        "reports_down": 87,
+        "reports_up": 112
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 34,
+        "reports_down": 35,
+        "reports_up": 49
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 31,
+        "reports_down": 34,
+        "reports_up": 23
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 13,
+        "reports_down": 13,
+        "reports_up": 15
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 17,
+        "reports_down": 20,
+        "reports_up": 41
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 84,
+        "reports_down": 89,
+        "reports_up": 54
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 15,
+        "reports_down": 16,
+        "reports_up": 20
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 19,
+        "reports_up": 25
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 24,
+        "reports_up": 13
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 20,
+        "reports_down": 20,
+        "reports_up": 34
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 25,
+        "reports_up": 19
+      },
+      {
+        "day": "2026-08-04",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 9,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 82,
+        "reports_down": 102,
+        "reports_up": 116
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 210,
+        "reports_down": 230,
+        "reports_up": 173
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 289,
+        "reports_down": 348,
+        "reports_up": 384
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 912,
+        "reports_down": 1445,
+        "reports_up": 1154
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 336,
+        "reports_down": 376,
+        "reports_up": 417
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 342,
+        "reports_down": 367,
+        "reports_up": 296
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 632,
+        "reports_down": 751,
+        "reports_up": 648
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 309,
+        "reports_down": 424,
+        "reports_up": 520
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 9,
+        "reports_down": 9,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 14,
+        "reports_down": 14,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 161,
+        "reports_down": 172,
+        "reports_up": 154
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 14
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 72,
+        "reports_down": 73,
+        "reports_up": 78
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 20,
+        "reports_up": 23
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 31,
+        "reports_down": 33,
+        "reports_up": 52
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 61,
+        "reports_down": 63,
+        "reports_up": 76
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 24,
+        "reports_up": 33
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 50,
+        "reports_down": 50,
+        "reports_up": 39
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 9
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 11,
+        "reports_down": 11,
+        "reports_up": 10
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 11,
+        "reports_down": 11,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 19,
+        "reports_up": 13
+      },
+      {
+        "day": "2026-08-05",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 9,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 44,
+        "reports_down": 71,
+        "reports_up": 72
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 197,
+        "reports_down": 210,
+        "reports_up": 265
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 182,
+        "reports_down": 187,
+        "reports_up": 202
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 212,
+        "reports_down": 308,
+        "reports_up": 393
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 25,
+        "reports_up": 27
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 624,
+        "reports_down": 851,
+        "reports_up": 862
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 75,
+        "reports_down": 81,
+        "reports_up": 118
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 9
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 151,
+        "reports_down": 184,
+        "reports_up": 272
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 42,
+        "reports_down": 42,
+        "reports_up": 44
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 350,
+        "reports_down": 388,
+        "reports_up": 478
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 55,
+        "reports_down": 59,
+        "reports_up": 49
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 70,
+        "reports_down": 70,
+        "reports_up": 109
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 19
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 11
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 21,
+        "reports_down": 26,
+        "reports_up": 22
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 20,
+        "reports_down": 20,
+        "reports_up": 14
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 14,
+        "reports_down": 14,
+        "reports_up": 10
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 8
+      },
+      {
+        "day": "2026-08-06",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 10
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 47,
+        "reports_down": 47,
+        "reports_up": 144
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 52,
+        "reports_down": 52,
+        "reports_up": 78
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 164,
+        "reports_down": 185,
+        "reports_up": 477
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 35,
+        "reports_down": 37,
+        "reports_up": 137
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 102,
+        "reports_down": 108,
+        "reports_up": 211
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 39,
+        "reports_down": 40,
+        "reports_up": 56
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 28,
+        "reports_down": 29,
+        "reports_up": 41
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 93,
+        "reports_down": 97,
+        "reports_up": 275
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 24,
+        "reports_down": 25,
+        "reports_up": 34
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 41,
+        "reports_down": 43,
+        "reports_up": 128
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 10
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 7,
+        "reports_down": 7,
+        "reports_up": 29
+      },
+      {
+        "day": "2026-08-07",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 12
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 52,
+        "reports_down": 54,
+        "reports_up": 175
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 52,
+        "reports_down": 56,
+        "reports_up": 121
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 38,
+        "reports_down": 42,
+        "reports_up": 39
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 49,
+        "reports_down": 50,
+        "reports_up": 80
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 84,
+        "reports_down": 87,
+        "reports_up": 278
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 32,
+        "reports_down": 34,
+        "reports_up": 39
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 9
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 3,
+        "reports_down": 3,
+        "reports_up": 9
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 33,
+        "reports_down": 34,
+        "reports_up": 63
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 22,
+        "reports_down": 24,
+        "reports_up": 85
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 8,
+        "reports_down": 8,
+        "reports_up": 9
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 12,
+        "reports_down": 12,
+        "reports_up": 63
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 35
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 23,
+        "reports_down": 24,
+        "reports_up": 31
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 6
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-08-08",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Ariana",
+        "type": "electricity",
+        "zones": 102,
+        "reports_down": 103,
+        "reports_up": 228
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Nabeul",
+        "type": "electricity",
+        "zones": 42,
+        "reports_down": 43,
+        "reports_up": 56
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Manouba",
+        "type": "electricity",
+        "zones": 13,
+        "reports_down": 13,
+        "reports_up": 83
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Ben Arous",
+        "type": "electricity",
+        "zones": 63,
+        "reports_down": 63,
+        "reports_up": 117
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Tunis",
+        "type": "electricity",
+        "zones": 57,
+        "reports_down": 61,
+        "reports_up": 105
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Monastir",
+        "type": "electricity",
+        "zones": 17,
+        "reports_down": 17,
+        "reports_up": 23
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Kébili",
+        "type": "electricity",
+        "zones": 2,
+        "reports_down": 2,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Béja",
+        "type": "electricity",
+        "zones": 5,
+        "reports_down": 5,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Mahdia",
+        "type": "electricity",
+        "zones": 33,
+        "reports_down": 35,
+        "reports_up": 35
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Bizerte",
+        "type": "electricity",
+        "zones": 25,
+        "reports_down": 26,
+        "reports_up": 46
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Sousse",
+        "type": "electricity",
+        "zones": 19,
+        "reports_down": 20,
+        "reports_up": 47
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Zaghouan",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Sfax",
+        "type": "electricity",
+        "zones": 25,
+        "reports_down": 25,
+        "reports_up": 66
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Gafsa",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 5
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Médenine",
+        "type": "electricity",
+        "zones": 12,
+        "reports_down": 12,
+        "reports_up": 23
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Gabès",
+        "type": "electricity",
+        "zones": 6,
+        "reports_down": 6,
+        "reports_up": 16
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Le Kef",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Sidi Bouzid",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 4
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Siliana",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Kasserine",
+        "type": "electricity",
+        "zones": 4,
+        "reports_down": 4,
+        "reports_up": 2
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Kairouan",
+        "type": "electricity",
+        "zones": 1,
+        "reports_down": 1,
+        "reports_up": 1
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Jendouba",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 3
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Tataouine",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 7
+      },
+      {
+        "day": "2026-08-09",
+        "region": "Tozeur",
+        "type": "electricity",
+        "zones": 0,
+        "reports_down": 0,
+        "reports_up": 1
+      }
+    ]
+  }
+}

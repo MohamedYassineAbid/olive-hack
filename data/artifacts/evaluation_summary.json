@@ -1,0 +1,14 @@
+{
+  "n_days": 18,
+  "n_rows": 432,
+  "baseline_mae": {
+    "naive_yesterday": 2592.7,
+    "rolling_3_day": 3559.2,
+    "rolling_7_day": 3534.7
+  },
+  "rule_scorer_correlation_r": 0.904,
+  "caveats": [
+    "Only 18 days of history \u2014 baseline MAE estimates are high-variance; do not over-interpret.",
+    "Supervised ML train/val/test split requires >= 90 days. Current: 18. Rule-based Phase-1 scorer is in use."
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "n_days": 18,
+  "ml_ready": false,
+  "thresholds": {
+    "temp_high_c": 37.7,
+    "temp_extreme_c": 41.5,
+    "heat_stress_high": 64.7,
+    "heat_stress_extreme": 75.1,
+    "reports_high": 936,
+    "reports_extreme": 4151
+  },
+  "gov_baseline_reports": {
+    "Ariana": 928.0555555555555,
+    "Beja": 0.0,
+    "Ben Arous": 543.1111111111111,
+    "Bizerte": 182.0,
+    "Gabes": 0.0,
+    "Gafsa": 12.066666666666666,
+    "Jendouba": 13.846153846153847,
+    "Kairouan": 12.5,
+    "Kasserine": 13.235294117647058,
+    "Kebili": 0.0,
+    "Kef": 0.0,
+    "Mahdia": 53.94444444444444,
+    "Manouba": 324.8333333333333,
+    "Medenine": 0.0,
+    "Monastir": 58.666666666666664,
+    "Nabeul": 200.72222222222223,
+    "Sfax": 385.55555555555554,
+    "Sidi Bouzid": 16.176470588235293,
+    "Siliana": 14.833333333333334,
+    "Sousse": 118.27777777777777,
+    "Tataouine": 27.4375,
+    "Tozeur": 14.625,
+    "Tunis": 387.44444444444446,
+    "Zaghouan": 32.55555555555556
+  },
+  "feature_stats": {
+    "temp_max": {
+      "mean": 37.284,
+      "std": 3.806
+    },
+    "temp_min": {
+      "mean": 25.7377,
+      "std": 2.3618
+    },
+    "temp_mean": {
+      "mean": 31.2713,
+      "std": 2.6485
+    },
+    "rh_max": {
+      "mean": 74.9931,
+      "std": 15.4213
+    },
+    "rh_min": {
+      "mean": 28.6829,
+      "std": 13.7896
+    },
+    "wind_max": {
+      "mean": 18.9248,
+      "std": 5.1859
+    },
+    "precip": {
+      "mean": 0.1176,
+      "std": 0.3602
+    },
+    "et0": {
+      "mean": 7.042,
+      "std": 1.1599
+    },
+    "zones": {
+      "mean": 128.9415,
+      "std": 254.3634
+    },
+    "reports_down": {
+      "mean": 138.4491,
+      "std": 378.0745
+    },
+    "reports_up": {
+      "mean": 216.848,
+      "std": 401.7404
+    },
+    "reports_total": {
+      "mean": 138.4491,
+      "std": 378.0745
+    },
+    "temp_range": {
+      "mean": 11.5463,
+      "std": 3.4702
+    },
+    "rh_mean": {
+      "mean": 51.838,
+      "std": 13.2667
+    },
+    "heat_stress": {
+      "mean": 62.8287,
+      "std": 11.9451
+    },
+    "day_of_week": {
+      "mean": 3.3333,
+      "std": 1.9459
+    },
+    "month": {
+      "mean": 7.5,
+      "std": 0.5006
+    },
+    "is_weekend": {
+      "mean": 0.3333,
+      "std": 0.472
+    },
+    "reports_down_lag1": {
+      "mean": 137.4769,
+      "std": 378.3576
+    },
+    "reports_down_lag2": {
+      "mean": 136.5394,
+      "std": 378.6368
+    },
+    "reports_down_lag3": {
+      "mean": 134.9884,
+      "std": 378.9917
+    },
+    "reports_down_roll3": {
+      "mean": 137.5224,
+      "std": 302.6073
+    },
+    "reports_down_roll7": {
+      "mean": 138.0945,
+      "std": 256.4403
+    },
+    "national_reports_down": {
+      "mean": 3322.7778,
+      "std": 3727.2133
+    },
+    "national_reports_roll3": {
+      "mean": 3300.537,
+      "std": 2551.7733
+    }
+  }
+}

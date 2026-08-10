@@ -1,0 +1,23 @@
+# Core API
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.9.0
+
+# HTTP
+requests>=2.32.0
+httpx>=0.27.0
+tenacity>=8.3.0
+
+# Data
+pandas>=2.2.2
+numpy>=2.0.0
+pyarrow>=17.0.0
+
+# ML (Phase 1 only needs scikit-learn; xgboost is Phase 2)
+scikit-learn>=1.5.0
+
+# Templating
+jinja2>=3.1.4
+
+# Env
+python-dotenv>=1.0.0

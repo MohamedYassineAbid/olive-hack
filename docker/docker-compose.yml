@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+
+  # ── Risk prediction API ──────────────────────────────────────────────
+  risk-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: risk-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../data/raw:/app/data/raw
+      - ../data/processed:/app/data/processed
+      - ../data/artifacts:/app/data/artifacts
+    environment:
+      - INCIDENT_BASE=https://api.incident.tn/api/v1
+      - METEO_ARCHIVE_BASE=https://archive-api.open-meteo.com/v1/archive
+      - METEO_FORECAST_BASE=https://api.open-meteo.com/v1/forecast
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── n8n workflow engine ───────────────────────────────────────────────
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=changeme
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - ALERT_EMAIL=ops@hack-olive.tn
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ../n8n:/home/node/.n8n/workflows:ro
+    depends_on:
+      risk-api:
+        condition: service_healthy
+
+volumes:
+  n8n_data:

@@ -1,0 +1,489 @@
+{
+  "data": {
+    "window": {
+      "from": "2026-08-09T10:52:00+00:00",
+      "to": "2026-08-10T10:52:00+00:00",
+      "hours": 24,
+      "bucket_hours": 1,
+      "type": "electricity"
+    },
+    "totals": {
+      "reports": 1410,
+      "down": 457,
+      "up": 953,
+      "gps": 1,
+      "devices": 1408,
+      "regions": 24
+    },
+    "by_type": {
+      "water": {
+        "reports": 0,
+        "down": 0,
+        "up": 0
+      },
+      "electricity": {
+        "reports": 1410,
+        "down": 457,
+        "up": 953
+      },
+      "fire": {
+        "reports": 0,
+        "down": 0,
+        "up": 0
+      },
+      "flood": {
+        "reports": 0,
+        "down": 0,
+        "up": 0
+      }
+    },
+    "by_region": [
+      {
+        "region": "Ariana",
+        "reports": 392,
+        "down": 137,
+        "up": 255,
+        "devices": 392,
+        "share_pct": 30,
+        "population": 668552,
+        "per_100k": 20.5
+      },
+      {
+        "region": "Ben Arous",
+        "reports": 202,
+        "down": 65,
+        "up": 137,
+        "devices": 202,
+        "share_pct": 14.2,
+        "population": 722828,
+        "per_100k": 9
+      },
+      {
+        "region": "Tunis",
+        "reports": 175,
+        "down": 64,
+        "up": 111,
+        "devices": 175,
+        "share_pct": 14,
+        "population": 1075306,
+        "per_100k": 6
+      },
+      {
+        "region": "Nabeul",
+        "reports": 89,
+        "down": 32,
+        "up": 57,
+        "devices": 89,
+        "share_pct": 7,
+        "population": 863172,
+        "per_100k": 3.7
+      },
+      {
+        "region": "Médenine",
+        "reports": 63,
+        "down": 29,
+        "up": 34,
+        "devices": 63,
+        "share_pct": 6.3,
+        "population": 537255,
+        "per_100k": 5.4
+      },
+      {
+        "region": "Bizerte",
+        "reports": 68,
+        "down": 24,
+        "up": 44,
+        "devices": 68,
+        "share_pct": 5.3,
+        "population": 607388,
+        "per_100k": 4
+      },
+      {
+        "region": "Mahdia",
+        "reports": 57,
+        "down": 24,
+        "up": 33,
+        "devices": 57,
+        "share_pct": 5.3,
+        "population": 449985,
+        "per_100k": 5.3
+      },
+      {
+        "region": "Sfax",
+        "reports": 96,
+        "down": 22,
+        "up": 74,
+        "devices": 96,
+        "share_pct": 4.8,
+        "population": 1047468,
+        "per_100k": 2.1
+      },
+      {
+        "region": "Manouba",
+        "reports": 105,
+        "down": 21,
+        "up": 84,
+        "devices": 105,
+        "share_pct": 4.6,
+        "population": 418354,
+        "per_100k": 5
+      },
+      {
+        "region": "Sousse",
+        "reports": 66,
+        "down": 16,
+        "up": 50,
+        "devices": 66,
+        "share_pct": 3.5,
+        "population": 762281,
+        "per_100k": 2.1
+      },
+      {
+        "region": "Monastir",
+        "reports": 29,
+        "down": 8,
+        "up": 21,
+        "devices": 27,
+        "share_pct": 1.8,
+        "population": 599769,
+        "per_100k": 1.3
+      },
+      {
+        "region": "Gabès",
+        "reports": 22,
+        "down": 6,
+        "up": 16,
+        "devices": 22,
+        "share_pct": 1.3,
+        "population": 410847,
+        "per_100k": 1.5
+      },
+      {
+        "region": "Kasserine",
+        "reports": 4,
+        "down": 4,
+        "up": 0,
+        "devices": 4,
+        "share_pct": 0.9,
+        "population": 492741,
+        "per_100k": 0.8
+      },
+      {
+        "region": "Béja",
+        "reports": 7,
+        "down": 3,
+        "up": 4,
+        "devices": 7,
+        "share_pct": 0.7,
+        "population": 311417,
+        "per_100k": 1
+      },
+      {
+        "region": "Sidi Bouzid",
+        "reports": 5,
+        "down": 1,
+        "up": 4,
+        "devices": 5,
+        "share_pct": 0.2,
+        "population": 489991,
+        "per_100k": 0.2
+      },
+      {
+        "region": "Kébili",
+        "reports": 6,
+        "down": 1,
+        "up": 5,
+        "devices": 6,
+        "share_pct": 0.2,
+        "population": 183201,
+        "per_100k": 0.5
+      },
+      {
+        "region": "Zaghouan",
+        "reports": 3,
+        "down": 0,
+        "up": 3,
+        "devices": 3,
+        "share_pct": 0,
+        "population": 201065,
+        "per_100k": 0
+      },
+      {
+        "region": "Tataouine",
+        "reports": 6,
+        "down": 0,
+        "up": 6,
+        "devices": 6,
+        "share_pct": 0,
+        "population": 162654,
+        "per_100k": 0
+      },
+      {
+        "region": "Siliana",
+        "reports": 3,
+        "down": 0,
+        "up": 3,
+        "devices": 3,
+        "share_pct": 0,
+        "population": 216242,
+        "per_100k": 0
+      },
+      {
+        "region": "Le Kef",
+        "reports": 4,
+        "down": 0,
+        "up": 4,
+        "devices": 4,
+        "share_pct": 0,
+        "population": 237686,
+        "per_100k": 0
+      },
+      {
+        "region": "Jendouba",
+        "reports": 3,
+        "down": 0,
+        "up": 3,
+        "devices": 3,
+        "share_pct": 0,
+        "population": 404352,
+        "per_100k": 0
+      },
+      {
+        "region": "Gafsa",
+        "reports": 3,
+        "down": 0,
+        "up": 3,
+        "devices": 3,
+        "share_pct": 0,
+        "population": 388776,
+        "per_100k": 0
+      },
+      {
+        "region": "Kairouan",
+        "reports": 1,
+        "down": 0,
+        "up": 1,
+        "devices": 1,
+        "share_pct": 0,
+        "population": 600803,
+        "per_100k": 0
+      },
+      {
+        "region": "Tozeur",
+        "reports": 1,
+        "down": 0,
+        "up": 1,
+        "devices": 1,
+        "share_pct": 0,
+        "population": 120036,
+        "per_100k": 0
+      }
+    ],
+    "timeline": [
+      {
+        "t": "2026-08-09T10:00:00+00:00",
+        "down": 0,
+        "up": 0
+      },
+      {
+        "t": "2026-08-09T11:00:00+00:00",
+        "down": 8,
+        "up": 63
+      },
+      {
+        "t": "2026-08-09T12:00:00+00:00",
+        "down": 15,
+        "up": 43
+      },
+      {
+        "t": "2026-08-09T13:00:00+00:00",
+        "down": 16,
+        "up": 56
+      },
+      {
+        "t": "2026-08-09T14:00:00+00:00",
+        "down": 27,
+        "up": 70
+      },
+      {
+        "t": "2026-08-09T15:00:00+00:00",
+        "down": 44,
+        "up": 76
+      },
+      {
+        "t": "2026-08-09T16:00:00+00:00",
+        "down": 41,
+        "up": 60
+      },
+      {
+        "t": "2026-08-09T17:00:00+00:00",
+        "down": 15,
+        "up": 48
+      },
+      {
+        "t": "2026-08-09T18:00:00+00:00",
+        "down": 24,
+        "up": 47
+      },
+      {
+        "t": "2026-08-09T19:00:00+00:00",
+        "down": 7,
+        "up": 48
+      },
+      {
+        "t": "2026-08-09T20:00:00+00:00",
+        "down": 13,
+        "up": 37
+      },
+      {
+        "t": "2026-08-09T21:00:00+00:00",
+        "down": 23,
+        "up": 58
+      },
+      {
+        "t": "2026-08-09T22:00:00+00:00",
+        "down": 23,
+        "up": 47
+      },
+      {
+        "t": "2026-08-09T23:00:00+00:00",
+        "down": 44,
+        "up": 32
+      },
+      {
+        "t": "2026-08-10T00:00:00+00:00",
+        "down": 26,
+        "up": 43
+      },
+      {
+        "t": "2026-08-10T01:00:00+00:00",
+        "down": 31,
+        "up": 25
+      },
+      {
+        "t": "2026-08-10T02:00:00+00:00",
+        "down": 16,
+        "up": 13
+      },
+      {
+        "t": "2026-08-10T03:00:00+00:00",
+        "down": 8,
+        "up": 8
+      },
+      {
+        "t": "2026-08-10T04:00:00+00:00",
+        "down": 6,
+        "up": 7
+      },
+      {
+        "t": "2026-08-10T05:00:00+00:00",
+        "down": 3,
+        "up": 14
+      },
+      {
+        "t": "2026-08-10T06:00:00+00:00",
+        "down": 6,
+        "up": 13
+      },
+      {
+        "t": "2026-08-10T07:00:00+00:00",
+        "down": 11,
+        "up": 27
+      },
+      {
+        "t": "2026-08-10T08:00:00+00:00",
+        "down": 17,
+        "up": 32
+      },
+      {
+        "t": "2026-08-10T09:00:00+00:00",
+        "down": 15,
+        "up": 42
+      },
+      {
+        "t": "2026-08-10T10:00:00+00:00",
+        "down": 18,
+        "up": 44
+      }
+    ],
+    "movers": [
+      {
+        "region": "Tunis",
+        "before": 47,
+        "after": 17,
+        "delta": -30
+      },
+      {
+        "region": "Ben Arous",
+        "before": 42,
+        "after": 23,
+        "delta": -19
+      },
+      {
+        "region": "Mahdia",
+        "before": 4,
+        "after": 20,
+        "delta": 16
+      },
+      {
+        "region": "Médenine",
+        "before": 10,
+        "after": 19,
+        "delta": 9
+      },
+      {
+        "region": "Bizerte",
+        "before": 16,
+        "after": 8,
+        "delta": -8
+      },
+      {
+        "region": "Sousse",
+        "before": 11,
+        "after": 5,
+        "delta": -6
+      },
+      {
+        "region": "Gabès",
+        "before": 6,
+        "after": 0,
+        "delta": -6
+      },
+      {
+        "region": "Ariana",
+        "before": 71,
+        "after": 66,
+        "delta": -5
+      },
+      {
+        "region": "Sfax",
+        "before": 13,
+        "after": 9,
+        "delta": -4
+      },
+      {
+        "region": "Kasserine",
+        "before": 4,
+        "after": 0,
+        "delta": -4
+      },
+      {
+        "region": "Manouba",
+        "before": 9,
+        "after": 12,
+        "delta": 3
+      },
+      {
+        "region": "Nabeul",
+        "before": 17,
+        "after": 15,
+        "delta": -2
+      }
+    ],
+    "population": {
+      "source": "RGPH 2024, INS",
+      "year": 2024,
+      "total": 11972169
+    }
+  }
+}

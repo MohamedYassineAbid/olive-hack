@@ -1,0 +1,301 @@
+{
+  "name": "Tunisia Electricity Risk — Daily Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "id": "ff5f2b4e-3398-4d12-855f-702785be89dc",
+      "name": "Daily Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1264,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "latitude",
+              "value": "36.8065"
+            },
+            {
+              "name": "longitude",
+              "value": "10.1815"
+            },
+            {
+              "name": "daily",
+              "value": "temperature_2m_max,temperature_2m_min,temperature_2m_mean,relative_humidity_2m_max,wind_speed_10m_max,precipitation_sum"
+            },
+            {
+              "name": "forecast_days",
+              "value": "1"
+            },
+            {
+              "name": "timezone",
+              "value": "Africa/Tunis"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6b85eda5-4c4f-4246-9d44-35a28fb6abdf",
+      "name": "Fetch Weather",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1024,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const weather   = $node[\"Fetch Weather\"].json;\nconst incidents = $node[\"Fetch Incidents\"].json;\n\nconst daily = weather.daily;\nconst today = daily.time[0];\n\n// Sum national reports for today\nconst rows = (incidents && incidents.data && incidents.data.rows) \n  ? incidents.data.rows : [];\nconst todayRows = rows.filter(r => r.day === today);\nconst national  = todayRows.reduce((s, r) => s + (r.reports_down || 0), 0);\n\n// 3-day rolling average\nconst days  = [...new Set(rows.map(r => r.day))].sort().slice(-3);\nconst roll3 = days.length\n  ? rows.filter(r => days.includes(r.day))\n      .reduce((s, r) => s + (r.reports_down || 0), 0) / (days.length * 24)\n  : 0;\n\nconst GOVS = [\n  'Tunis', 'Sfax', 'Sousse', 'Bizerte', 'Gabes',\n  'Nabeul', 'Ariana', 'Ben Arous', 'Monastir', 'Kairouan'\n];\n\nconst observations = GOVS.map(name => ({\n  governorate: name,\n  day:         today,\n  temp_max:    daily.temperature_2m_max[0],\n  temp_min:    daily.temperature_2m_min[0],\n  temp_mean:   daily.temperature_2m_mean[0],\n  rh_max:      daily.relative_humidity_2m_max[0],\n  wind_max:    daily.wind_speed_10m_max[0],\n  precip:      daily.precipitation_sum[0] || 0,\n  national_reports_down:  national,\n  national_reports_roll3: roll3,\n  reports_down_lag1:  0,\n  reports_down_lag2:  0,\n  reports_down_lag3:  0,\n  reports_down_roll3: 0,\n  reports_down_roll7: 0\n}));\n\nreturn [{ json: { observations } }];\n"
+      },
+      "id": "36142a6e-02ae-4e3f-9d6b-4a272ef1f585",
+      "name": "Build Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://risk-api:8000/predict/batch",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ observations: $json.observations }) }}\n",
+        "options": {}
+      },
+      "id": "b9811c29-9a4b-4996-9ace-785c673dccd6",
+      "name": "Call Predict Batch",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -496,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://risk-api:8000/report/national",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ observations: $node[\"Build Payload\"].json.observations }) }}\n",
+        "options": {}
+      },
+      "id": "423354bc-c661-4565-8d75-4c86d24d71b4",
+      "name": "Call Report National",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -496,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond1",
+              "leftValue": "={{ $json.predictions.some(p => ['Extreme','High'].includes(p.risk_level)) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "72d90987-a4ce-4b2e-8b54-586554a2b1af",
+      "name": "Any High Risk?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "abidmohamedyassine00@gmail.com",
+        "toEmail": "={{ $vars.ALERT_EMAIL || 'abidmohamedyassine00@gmail.com' }}",
+        "subject": "⚡ HIGH/EXTREME electricity outage risk — {{ $now.toISODate() }}",
+        "options": {}
+      },
+      "id": "59b78404-948c-4687-b966-193e7326b1c6",
+      "name": "Send Alert Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "63be433f-1467-4bdf-b35a-d4baafedefe0",
+      "credentials": {
+        "smtp": {
+          "id": "dcDDSF5yRziMZVqm",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "7e04d733-6e14-4433-b2aa-bc0140ff3f63",
+      "name": "No Alert Needed",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        0,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.incident.tn/api/v1/history",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "type",
+              "value": "electricity"
+            },
+            {
+              "name": "days",
+              "value": "7"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f59c7197-706e-4ccb-bf7c-adc6651bef34",
+      "name": "Fetch Incidents",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1024,
+        320
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily Trigger": {
+      "main": [
+        [
+          {
+            "node": "Fetch Weather",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Weather": {
+      "main": [
+        [
+          {
+            "node": "Fetch Incidents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Payload": {
+      "main": [
+        [
+          {
+            "node": "Call Predict Batch",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Call Report National",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Predict Batch": {
+      "main": [
+        [
+          {
+            "node": "Any High Risk?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any High Risk?": {
+      "main": [
+        [
+          {
+            "node": "Send Alert Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Alert Needed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Incidents": {
+      "main": [
+        [
+          {
+            "node": "Build Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c16a7dfb-149d-42d9-8362-65539770bdeb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7b0039222f9b400b2cae145c4f5c64c054cf479845ee7b841f8eeb59a86b89cd"
+  },
+  "nodeGroups": [],
+  "id": "FY0rSbrGM8SHlx77",
+  "tags": []
+}
