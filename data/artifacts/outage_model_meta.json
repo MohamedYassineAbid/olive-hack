@@ -1,0 +1,102 @@
+{
+  "feature_cols": [
+    "dow",
+    "month",
+    "is_weekend",
+    "temp_max",
+    "temp_min",
+    "temp_mean",
+    "rh_max",
+    "wind_max",
+    "precip",
+    "national_reports",
+    "region_reports",
+    "prev_day_outage",
+    "outages_last3"
+  ],
+  "all_regions": [
+    "جهة تونس الكبرى",
+    "جهة الشمال",
+    "جهة الشمال الغربي",
+    "جهة الوسط",
+    "جهة صفاقس",
+    "جهة الجنوب",
+    "جهة الجنوب الغربي"
+  ],
+  "region_map": {
+    "جهة تونس الكبرى": {
+      "lat": 36.8065,
+      "lon": 10.1815,
+      "govs": [
+        "Tunis",
+        "Ariana",
+        "Ben Arous",
+        "Manouba"
+      ]
+    },
+    "جهة الشمال": {
+      "lat": 37.2744,
+      "lon": 9.8739,
+      "govs": [
+        "Bizerte",
+        "Beja",
+        "Jendouba"
+      ]
+    },
+    "جهة الشمال الغربي": {
+      "lat": 36.5011,
+      "lon": 8.7803,
+      "govs": [
+        "Jendouba",
+        "Kef",
+        "Siliana"
+      ]
+    },
+    "جهة الوسط": {
+      "lat": 35.6781,
+      "lon": 10.0964,
+      "govs": [
+        "Kairouan",
+        "Sousse",
+        "Monastir",
+        "Mahdia"
+      ]
+    },
+    "جهة صفاقس": {
+      "lat": 34.7406,
+      "lon": 10.7603,
+      "govs": [
+        "Sfax"
+      ]
+    },
+    "جهة الجنوب": {
+      "lat": 33.8881,
+      "lon": 10.0975,
+      "govs": [
+        "Gabes",
+        "Medenine",
+        "Tataouine"
+      ]
+    },
+    "جهة الجنوب الغربي": {
+      "lat": 33.9197,
+      "lon": 8.1336,
+      "govs": [
+        "Tozeur",
+        "Kebili",
+        "Gafsa",
+        "Sidi Bouzid",
+        "Kasserine"
+      ]
+    }
+  },
+  "train_accuracy": 1.0,
+  "n_train_rows": 77,
+  "n_outage_rows": 55,
+  "trained_at": "2026-08-11T16:40:53.864873",
+  "data_sources": [
+    "steg_scrape",
+    "incident_tn",
+    "open_meteo"
+  ]
+}

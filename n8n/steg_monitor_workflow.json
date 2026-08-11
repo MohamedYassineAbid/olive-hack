@@ -1,0 +1,203 @@
+{
+  "name": "STEG Outage Monitor — Every 3 Hours",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Every 3 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "2",
+      "name": "Fetch STEG News",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        300
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.steg.com.tn/fr/news",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "3",
+      "name": "Parse and Deduplicate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Deduplication via workflow static data.\n// Persists between SCHEDULED runs automatically.\n// Manual \"Execute workflow\" clicks reset it (this is normal — use for testing).\nconst stored   = $getWorkflowStaticData('global');\nconst lastSeen = stored.lastSeenUrl || '';\n\nconst body = items[0].json.data || items[0].json || '';\nconst html = typeof body === 'string' ? body : JSON.stringify(body);\n\n// Extract articles from STEG news page\nconst dates  = [...html.matchAll(/(\\d{2}\\/\\d{2}\\/\\d{4}\\s*-\\s*\\d{2}:\\d{2})/g)].map(m => m[1].trim());\nconst links  = [...html.matchAll(/href=\"(\\/fr\\/news\\/[^\"]+)\"/g)].map(m => 'https://www.steg.com.tn' + m[1]);\nconst titles = [...html.matchAll(/<h[2-4][^>]*>([\\s\\S]*?)<\\/h[2-4]>/g)]\n  .map(m => m[1].replace(/<[^>]+>/g, '').trim())\n  .filter(t => t.length > 5);\n\nconst articles = [];\nconst count = Math.min(links.length, 20);\nfor (let i = 0; i < count; i++) {\n  articles.push({\n    date:  dates[i]  || '',\n    title: titles[i] || links[i].split('/').pop().replace(/-/g, ' '),\n    url:   links[i]\n  });\n}\n\n// Filter to outage articles\nconst outageKW = ['\\u0627\\u0646\\u0642\\u0637\\u0627\\u0639', 'coupure', 'Coupure', 'interruption', 'panne', 'inqita'];\nconst outages = articles.filter(a => outageKW.some(kw => a.title.includes(kw) || a.url.includes(kw)));\nconst result  = outages.length > 0 ? outages : articles.slice(0, 8);\n\n// Sfax filter (set SFAX_ONLY=false to get all governorates)\nconst SFAX_ONLY = true;\nconst sfaxKW = ['\\u0635\\u0641\\u0627\\u0642\\u0633', 'Sfax', 'sfax'];\nconst sfaxArticles = result.filter(a => sfaxKW.some(kw => a.title.includes(kw) || a.url.includes(kw)));\nconst finalResult  = SFAX_ONLY ? sfaxArticles : result;\n\nif (finalResult.length === 0) {\n  return [{ json: { isNew: false, articles: [], latestUrl: '', sfaxCount: 0 } }];\n}\n\nconst latestUrl = finalResult[0].url;\nconst isNew     = latestUrl !== lastSeen;\n\nif (isNew) {\n  stored.lastSeenUrl = latestUrl;\n}\n\nreturn [{ json: { isNew, articles: finalResult, latestUrl, lastSeen, sfaxCount: sfaxArticles.length } }];"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Is New?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ String($json.isNew) }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "5",
+      "name": "Build Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        180
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const articles = $json.articles || [];\n\nconst rows = articles.map(a => `\n  <tr>\n    <td style='padding:9px 14px;font-size:0.82rem;color:#666;white-space:nowrap'>${a.date}</td>\n    <td style='padding:9px 14px'>\n      <a href='${a.url}' style='color:#1a1a2e;font-weight:600;text-decoration:none'>\n        ${a.title}\n      </a>\n    </td>\n    <td style='padding:9px 14px'>\n      <a href='${a.url}' style='color:#1565c0;font-size:0.8rem;white-space:nowrap'>Lire →</a>\n    </td>\n  </tr>`).join('');\n\nconst now = new Date().toLocaleString('fr-TN', {timeZone:'Africa/Tunis'});\n\nconst html = `<!DOCTYPE html><html><head><meta charset='UTF-8'/></head>\n<body style='font-family:Arial,sans-serif;background:#f4f6f9;padding:20px'>\n<div style='max-width:700px;margin:auto'>\n  <div style='background:#b71c1c;color:#fff;padding:16px 20px;border-radius:8px 8px 0 0'>\n    <h2 style='margin:0;font-size:1.15rem'>⚡ STEG — Nouveaux avis d'interruption électrique</h2>\n    <p style='margin:4px 0 0;font-size:0.8rem;opacity:0.85'>${now} · hack-olive · steg.com.tn</p>\n  </div>\n  <table style='width:100%;border-collapse:collapse;background:#fff;border-radius:0 0 8px 8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)'>\n    <thead><tr style='background:#1a1a2e;color:#fff'>\n      <th style='padding:9px 14px;text-align:left;font-size:0.8rem'>Date</th>\n      <th style='padding:9px 14px;text-align:left;font-size:0.8rem'>Avis</th>\n      <th style='padding:9px 14px;text-align:left;font-size:0.8rem'></th>\n    </tr></thead>\n    <tbody>${rows}</tbody>\n  </table>\n  <p style='margin-top:14px;font-size:0.75rem;color:#aaa;text-align:center'>\n    Source: <a href='https://www.steg.com.tn/fr/news' style='color:#aaa'>steg.com.tn/fr/news</a>\n    · Vérification automatique toutes les 3 heures\n  </p>\n</div></body></html>`;\n\nconst today = new Date().toLocaleDateString('fr-TN', {timeZone:'Africa/Tunis'});\nconst sfaxNote = $node['Parse and Deduplicate'].json.sfaxCount > 0\n  ? ` (dont ${$node['Parse and Deduplicate'].json.sfaxCount} Sfax)` : '';\nreturn [{ json: {\n  subject: `⚡ STEG — ${articles.length} avis de coupure${sfaxNote} — ${today}`,\n  html\n}}];"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1440,
+        180
+      ],
+      "parameters": {
+        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
+        "toEmail": "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "html",
+        "message": "={{ $json.html }}"
+      }
+    },
+    {
+      "id": "7",
+      "name": "Nothing New",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        420
+      ],
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "Every 3 Hours": {
+      "main": [
+        [
+          {
+            "node": "Fetch STEG News",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch STEG News": {
+      "main": [
+        [
+          {
+            "node": "Parse and Deduplicate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse and Deduplicate": {
+      "main": [
+        [
+          {
+            "node": "Is New?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is New?": {
+      "main": [
+        [
+          {
+            "node": "Build Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Nothing New",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Email": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0
+}

@@ -9,132 +9,37 @@
       "position": [240, 300],
       "parameters": {
         "rule": {
-          "interval": [
-            {
-              "field": "cronExpression",
-              "expression": "0 6 * * *"
-            }
-          ]
+          "interval": [{ "field": "cronExpression", "expression": "0 6 * * *" }]
         }
       }
     },
     {
       "id": "2",
-      "name": "Fetch Weather",
+      "name": "Fetch All 24 Governorates",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [480, 180],
+      "position": [500, 160],
       "parameters": {
         "method": "GET",
-        "url": "https://api.open-meteo.com/v1/forecast",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            { "name": "latitude",      "value": "36.8065" },
-            { "name": "longitude",     "value": "10.1815" },
-            { "name": "daily",         "value": "temperature_2m_max,temperature_2m_min,temperature_2m_mean,relative_humidity_2m_max,wind_speed_10m_max,precipitation_sum" },
-            { "name": "forecast_days", "value": "1" },
-            { "name": "timezone",      "value": "Africa/Tunis" }
-          ]
-        },
+        "url": "http://192.168.1.17:8000/daily/score",
         "options": {}
       }
     },
     {
       "id": "3",
-      "name": "Fetch Incidents",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [480, 420],
-      "parameters": {
-        "method": "GET",
-        "url": "https://api.incident.tn/api/v1/history",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            { "name": "type", "value": "electricity" },
-            { "name": "days", "value": "7" }
-          ]
-        },
-        "options": {}
-      }
-    },
-    {
-      "id": "4",
-      "name": "Build Payload",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [740, 300],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const weather   = $node[\"Fetch Weather\"].json;\nconst incidents = $node[\"Fetch Incidents\"].json;\n\nconst daily = weather.daily;\nconst today = daily.time[0];\n\nconst rows = (incidents && incidents.data && incidents.data.rows)\n  ? incidents.data.rows : [];\nconst todayRows = rows.filter(r => r.day === today);\nconst national  = todayRows.reduce((s, r) => s + (r.reports_down || 0), 0);\n\nconst days  = [...new Set(rows.map(r => r.day))].sort().slice(-3);\nconst roll3 = days.length\n  ? rows.filter(r => days.includes(r.day))\n      .reduce((s, r) => s + (r.reports_down || 0), 0) / (days.length * 24)\n  : 0;\n\nconst GOVS = [\n  'Tunis', 'Sfax', 'Sousse', 'Bizerte', 'Gabes',\n  'Nabeul', 'Ariana', 'Ben Arous', 'Monastir', 'Kairouan'\n];\n\nconst observations = GOVS.map(name => ({\n  governorate: name,\n  day:         today,\n  temp_max:    daily.temperature_2m_max[0],\n  temp_min:    daily.temperature_2m_min[0],\n  temp_mean:   daily.temperature_2m_mean[0],\n  rh_max:      daily.relative_humidity_2m_max[0],\n  wind_max:    daily.wind_speed_10m_max[0],\n  precip:      daily.precipitation_sum[0] || 0,\n  national_reports_down:  national,\n  national_reports_roll3: roll3,\n  reports_down_lag1:  0,\n  reports_down_lag2:  0,\n  reports_down_lag3:  0,\n  reports_down_roll3: 0,\n  reports_down_roll7: 0\n}));\n\nreturn [{ json: { observations, today, temp_max: daily.temperature_2m_max[0], national } }];"
-      }
-    },
-    {
-      "id": "5",
-      "name": "Call Predict Batch",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [1000, 180],
-      "parameters": {
-        "method": "POST",
-        "url": "http://risk-api:8000/predict/batch",
-        "sendBody": true,
-        "contentType": "json",
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ observations: $json.observations }) }}",
-        "options": {}
-      }
-    },
-    {
-      "id": "6",
-      "name": "Call Report National",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [1000, 420],
-      "parameters": {
-        "method": "POST",
-        "url": "http://risk-api:8000/report/national",
-        "sendBody": true,
-        "contentType": "json",
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ observations: $node['Build Payload'].json.observations }) }}",
-        "options": {}
-      }
-    },
-    {
-      "id": "10",
-      "name": "Build Daily Summary Email",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [1000, 620],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const today    = $node['Build Payload'].json.today;\nconst temp_max = $node['Build Payload'].json.temp_max;\nconst national = $node['Build Payload'].json.national;\n\nconst html = `\n<div style=\"font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;background:#f4f6f9;border-radius:10px\">\n  <h2 style=\"color:#1a1a2e\">📊 Daily Weather & Outage Report — ${today}</h2>\n  <table style=\"width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden\">\n    <tr style=\"background:#1a1a2e;color:#fff\">\n      <th style=\"padding:10px 14px;text-align:left\">Metric</th>\n      <th style=\"padding:10px 14px;text-align:left\">Value</th>\n    </tr>\n    <tr><td style=\"padding:9px 14px\">🌡️ Max Temperature (Tunis)</td><td style=\"padding:9px 14px\"><strong>${temp_max}°C</strong></td></tr>\n    <tr style=\"background:#fafbfc\"><td style=\"padding:9px 14px\">📋 National Outage Reports</td><td style=\"padding:9px 14px\"><strong>${national.toLocaleString()}</strong></td></tr>\n    <tr><td style=\"padding:9px 14px\">📅 Date</td><td style=\"padding:9px 14px\">${today}</td></tr>\n  </table>\n  <p style=\"margin-top:16px;font-size:0.8rem;color:#aaa\">hack-olive · Tunisia Electricity Risk System · Automated daily digest</p>\n</div>`;\n\nreturn [{ json: { subject: `📊 Daily Report — ${today} — Temp: ${temp_max}°C`, html } }];"
-      }
-    },
-    {
-      "id": "7",
       "name": "Any High Risk?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [1260, 180],
+      "position": [760, 160],
       "parameters": {
         "conditions": {
-          "options": {
-            "caseSensitive": false,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
           "conditions": [
             {
-              "id": "cond1",
-              "leftValue": "={{ $json.predictions.some(p => ['Extreme','High'].includes(p.risk_level)) }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              }
+              "id": "c1",
+              "leftValue": "={{ String($json.has_high_risk) }}",
+              "rightValue": "true",
+              "operator": { "type": "string", "operation": "equals" }
             }
           ],
           "combinator": "and"
@@ -142,35 +47,118 @@
       }
     },
     {
-      "id": "8",
+      "id": "4",
       "name": "Send Alert Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [1500, 80],
+      "position": [1020, 60],
       "parameters": {
-        "fromEmail": "alerts@hack-olive.tn",
+        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
         "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
-        "subject":   "={{ '⚡ HIGH/EXTREME electricity outage risk — ' + $node['Build Payload'].json.today }}",
+        "subject":   "={{ '⚡ HIGH/EXTREME outage risk — ' + $json.date }}",
         "emailType": "html",
-        "message":   "={{ $node['Call Report National'].json.body || '<p>See attached risk report.</p>' }}"
+        "message":   "={{ $node['Fetch All 24 Governorates'].json.html }}"
+      }
+    },
+    {
+      "id": "5",
+      "name": "No Alert Needed",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1020, 280],
+      "parameters": {}
+    },
+    {
+      "id": "6",
+      "name": "Build Daily Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [760, 360],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const d = items[0].json;\nconst date     = d.date || new Date().toISOString().slice(0,10);\nconst national = d.national_reports || 0;\nconst preds    = d.predictions || [];\n\nconst top5 = preds.slice().sort((a,b)=>b.risk_score-a.risk_score).slice(0,5);\nconst highCount = preds.filter(p=>['High','Extreme'].includes(p.risk_level)).length;\n\nconst rows = top5.map(p=>`<tr><td style='padding:8px 12px'><strong>${p.governorate}</strong></td><td style='padding:8px 12px'><span style='background:${p.risk_color};color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem'>${p.risk_level}</span></td><td style='padding:8px 12px'>${p.temp_max}°C</td><td style='padding:8px 12px'>${p.heat_stress}°C</td></tr>`).join('');\n\nconst html = `<!DOCTYPE html><html><head><meta charset='UTF-8'/></head><body style='font-family:Arial,sans-serif;background:#f4f6f9;padding:20px'><div style='max-width:620px;margin:auto'><h2 style='color:#1a1a2e'>📊 Daily Weather & Risk Report</h2><p style='color:#666;font-size:0.85rem;margin-bottom:16px'>${date} · hack-olive</p><table style='width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;margin-bottom:16px'><tr style='background:#1a1a2e;color:#fff'><th style='padding:9px 12px;text-align:left'>Metric</th><th style='padding:9px 12px;text-align:left'>Value</th></tr><tr><td style='padding:8px 12px'>📋 National Outage Reports</td><td style='padding:8px 12px'><strong>${national.toLocaleString()}</strong></td></tr><tr style='background:#fafbfc'><td style='padding:8px 12px'>🏙️ Governorates Scored</td><td style='padding:8px 12px'><strong>${preds.length} / 24</strong></td></tr><tr><td style='padding:8px 12px'>🚨 High/Extreme Risk</td><td style='padding:8px 12px'><strong>${highCount}</strong></td></tr></table><h3 style='font-size:0.95rem;margin-bottom:8px'>Top 5 Risk Governorates</h3><table style='width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden'><tr style='background:#1a1a2e;color:#fff'><th style='padding:8px 12px;text-align:left'>Governorate</th><th style='padding:8px 12px;text-align:left'>Risk</th><th style='padding:8px 12px;text-align:left'>Temp</th><th style='padding:8px 12px;text-align:left'>Heat Index</th></tr>${rows}</table><p style='margin-top:14px;font-size:0.75rem;color:#aaa'>hack-olive · Tunisia Electricity Risk</p></div></body></html>`;\n\nreturn [{json:{subject:`📊 Daily Report — ${date} — ${highCount} high-risk gov(s)`,html}}];"
+      }
+    },
+    {
+      "id": "7",
+      "name": "Send Daily Summary Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1020, 460],
+      "parameters": {
+        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
+        "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
+        "subject":   "={{ $json.subject }}",
+        "emailType": "html",
+        "message":   "={{ $json.html }}"
+      }
+    },
+    {
+      "id": "8",
+      "name": "Fetch Sfax 7-Day Forecast",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 560],
+      "parameters": {
+        "method": "GET",
+        "url": "http://192.168.1.17:8000/forecast/governorate",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "governorate", "value": "Sfax" },
+            { "name": "days",        "value": "7" }
+          ]
+        },
+        "options": {}
       }
     },
     {
       "id": "9",
-      "name": "No Alert Needed",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [1500, 300],
-      "parameters": {}
+      "name": "Send Sfax Forecast Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [760, 660],
+      "parameters": {
+        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
+        "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
+        "subject":   "={{ '🔮 Sfax 7-Day Forecast — peak: ' + ($json.peak_risk_level || 'Low') + ' on ' + ($json.peak_risk_day || 'n/a') }}",
+        "emailType": "html",
+        "message":   "={{ $json.html }}"
+      }
+    },
+    {
+      "id": "10",
+      "name": "Fetch Outage Forecast",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 780],
+      "parameters": {
+        "method": "GET",
+        "url": "http://192.168.1.17:8000/forecast/outage/html",
+        "options": {
+          "response": { "response": { "responseFormat": "text" } }
+        }
+      }
     },
     {
       "id": "11",
-      "name": "Send Daily Summary Email",
+      "name": "Build Outage Forecast Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [760, 880],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const raw  = items[0].json;\nconst html = typeof raw === 'string' ? raw : (raw.data || raw.body || JSON.stringify(raw));\nconst today = new Date().toISOString().slice(0,10);\nreturn [{json:{subject:`🔮 7-Day Outage Forecast (ML) — ${today}`, html}}];"
+      }
+    },
+    {
+      "id": "12",
+      "name": "Send Outage Forecast Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [1260, 620],
+      "position": [1020, 980],
       "parameters": {
-        "fromEmail": "alerts@hack-olive.tn",
+        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
         "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
         "subject":   "={{ $json.subject }}",
         "emailType": "html",
@@ -181,38 +169,37 @@
   "connections": {
     "Daily Trigger": {
       "main": [[
-        { "node": "Fetch Weather",   "type": "main", "index": 0 }
+        { "node": "Fetch All 24 Governorates", "type": "main", "index": 0 },
+        { "node": "Fetch Sfax 7-Day Forecast", "type": "main", "index": 0 },
+        { "node": "Fetch Outage Forecast",     "type": "main", "index": 0 }
       ]]
     },
-    "Fetch Weather": {
-      "main": [[{ "node": "Fetch Incidents", "type": "main", "index": 0 }]]
-    },
-    "Fetch Incidents": {
-      "main": [[{ "node": "Build Payload", "type": "main", "index": 0 }]]
-    },
-    "Build Payload": {
+    "Fetch All 24 Governorates": {
       "main": [[
-        { "node": "Call Predict Batch",        "type": "main", "index": 0 },
-        { "node": "Call Report National",      "type": "main", "index": 0 },
-        { "node": "Build Daily Summary Email", "type": "main", "index": 0 }
+        { "node": "Any High Risk?",      "type": "main", "index": 0 },
+        { "node": "Build Daily Summary", "type": "main", "index": 0 }
       ]]
-    },
-    "Call Predict Batch": {
-      "main": [[{ "node": "Any High Risk?", "type": "main", "index": 0 }]]
     },
     "Any High Risk?": {
       "main": [
-        [{ "node": "Send Alert Email", "type": "main", "index": 0 }],
-        [{ "node": "No Alert Needed",  "type": "main", "index": 0 }]
+        [{ "node": "Send Alert Email",  "type": "main", "index": 0 }],
+        [{ "node": "No Alert Needed",   "type": "main", "index": 0 }]
       ]
     },
-    "Build Daily Summary Email": {
+    "Build Daily Summary": {
       "main": [[{ "node": "Send Daily Summary Email", "type": "main", "index": 0 }]]
+    },
+    "Fetch Sfax 7-Day Forecast": {
+      "main": [[{ "node": "Send Sfax Forecast Email", "type": "main", "index": 0 }]]
+    },
+    "Fetch Outage Forecast": {
+      "main": [[{ "node": "Build Outage Forecast Email", "type": "main", "index": 0 }]]
+    },
+    "Build Outage Forecast Email": {
+      "main": [[{ "node": "Send Outage Forecast Email", "type": "main", "index": 0 }]]
     }
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
+  "settings": { "executionOrder": "v1" },
   "staticData": null,
   "tags": [],
   "triggerCount": 0

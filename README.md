@@ -1,140 +1,172 @@
 # hack-olive — Tunisia Electricity Outage Risk System
 
-Predicts electricity outage risk across Tunisia's 24 governorates by combining
-live incident data from [incident.tn](https://incident.tn) with historical and
-forecast weather from [Open-Meteo](https://open-meteo.com).
+Predicts electricity outage risk and timing across Tunisia using three live data sources:
+- **STEG** scraped outage notices (`data/steg-outage-data/`)
+- **incident.tn** citizen outage reports API
+- **Open-Meteo** weather archive and forecast (no key required)
 
 ---
 
-## Architecture
-
-```
-incident.tn /history  ──┐
-incident.tn /analytics  ├──► download_data.py ──► merged_dataset
-Open-Meteo archive      ──┘
-                                    │
-                             features.py  (shared feature engineering)
-                                    │
-                             calibrate.py (derive thresholds → calibration.json)
-                                    │
-                             risk_model.py
-                             ┌──────┴──────┐
-                     Phase 1 │             │ Phase 2 (auto, ≥90 days)
-                   Rule-based │             │ XGBoost
-                    hybrid    │             │ (config flip, no rewrite)
-                                    │
-                            FastAPI  :8000
-                         /predict  /predict/batch
-                         /report/single  /report/national
-                                    │
-                              n8n workflow
-                        (daily 06:00 UTC, email alerts)
-```
-
-**Data status (Aug 2026):** 18 real days (Jul 23 – Aug 9).  
-Phase 1 (rule-based) is active. Phase 2 flips automatically once `n_days >= 90`.
-
----
-
-## Quick start
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# 1. Download live data + run full pipeline
-python run_pipeline.py
-
-# 2. Start the API
-uvicorn src.api.app:app --reload --port 8000
-
-# 3. Single prediction
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "governorate": "Tunis",
-    "day": "2026-08-10",
-    "temp_max": 42.5,
-    "temp_min": 28.1,
-    "temp_mean": 35.3,
-    "rh_max": 65,
-    "national_reports_down": 8500
-  }'
-
-# 4. National HTML report (open in browser)
-curl -X POST http://localhost:8000/report/national \
-  -H "Content-Type: application/json" \
-  -d @examples/batch_request.json > report.html
-```
-
----
-
-## Docker
-
-```bash
-cd docker
-docker compose up --build
-```
-
-- API: http://localhost:8000
-- n8n: http://localhost:5678  (admin / changeme)
-
-Import `n8n/workflow.json` via n8n → Workflows → Import.
-
----
-
-## Project layout
+## Project Structure
 
 ```
 hack-olive/
-├── src/
-│   ├── pipeline/
-│   │   ├── config.py          # all constants + paths
-│   │   ├── download_data.py   # incident.tn + Open-Meteo fetcher
-│   │   └── features.py        # shared feature engineering
-│   ├── model/
-│   │   ├── calibrate.py       # threshold derivation → calibration.json
-│   │   ├── risk_model.py      # Phase-1 rule scorer + Phase-2 XGBoost gate
-│   │   └── evaluate.py        # baselines + backtest
-│   ├── api/
-│   │   ├── app.py             # FastAPI application
-│   │   └── schemas.py         # Pydantic request/response models
-│   └── report/
-│       ├── generate_report.py # Jinja2 HTML renderer
-│       └── template.html      # report template
+├── core.py                        # config, features, calibration, risk scoring, HTML renderer
+├── api.py                         # FastAPI — all endpoints
+├── pipeline.py                    # download → merge → calibrate → evaluate → report (CLI)
+├── train_outage_model.py          # train XGBoost on STEG + incident.tn + weather, predict 7 days
+│
+├── data/
+│   ├── steg-outage-data/          # scraped STEG outage notices (113 events, 11 days)
+│   │   └── data/processed/
+│   │       ├── steg_outages.csv
+│   │       ├── steg_outages.json
+│   │       └── steg_outages.xlsx
+│   ├── raw/                       # live API responses (incident.tn + Open-Meteo)
+│   ├── processed/                 # merged_dataset.parquet / .csv (18 days × 24 govs)
+│   └── artifacts/                 # model files + forecasts (see below)
+│
 ├── n8n/
-│   └── workflow.json          # daily automation workflow
+│   ├── workflow.json              # daily risk pipeline (all 24 govs + Sfax 7-day + emails)
+│   └── steg_monitor_workflow.json # STEG news monitor every 3h → email on new outage notice
+│
 ├── docker/
 │   ├── Dockerfile
 │   └── docker-compose.yml
-├── data/
-│   ├── raw/                   # API JSON responses
-│   ├── processed/             # merged_dataset.parquet / .csv
-│   └── artifacts/             # calibration.json, reports, xgb model
-├── run_pipeline.py            # full pipeline runner
-├── verify_data.py             # data feasibility check (original)
+│
+├── verify_data.py                 # original data feasibility check
 └── requirements.txt
 ```
 
 ---
 
-## Phase 2 — XGBoost upgrade path
+## Model Artifacts (`data/artifacts/`)
 
-No code changes needed. Once `data/artifacts/calibration.json` shows
-`"ml_ready": true` (happens automatically when the pipeline sees ≥ 90 days):
+| File | Description |
+|------|-------------|
+| `outage_clf.json` | XGBoost binary classifier — outage yes/no per region per day |
+| `outage_reg.json` | XGBoost regressor — predicted start hour of outage |
+| `outage_model_meta.json` | Feature list, region map, training stats, data sources |
+| `outage_forecast_7day.json` | Latest 7-day forecast (JSON, served by `/forecast/outage`) |
+| `outage_forecast_7day.csv` | Same forecast as CSV |
+| `calibration.json` | Risk scorer thresholds derived from real incident.tn data |
+| `evaluation_summary.json` | Baseline MAE + rule scorer correlation |
+| `national_report_*.html` | Latest generated national risk report |
 
-1. Train a model and save it as `data/artifacts/xgb_model.json`
-2. Restart the API — it loads the model and switches phases automatically
+### Why XGBoost JSON, not joblib?
 
-The same feature columns used by the rule scorer feed directly into XGBoost.
+XGBoost models are saved in XGBoost's native `.json` format — not joblib. This is intentional:
+- **Portable** — loadable across Python versions and platforms
+- **Readable** — plain JSON, inspectable in any text editor
+- **Versioned** — XGBoost guarantees backward compatibility
+- **No pickle risk** — joblib/pickle files are a security risk if untrusted
 
 ---
 
-## Risk levels
+## Quick Start
 
-| Level    | Score range | Colour   |
-|----------|-------------|----------|
-| Low      | 0.00 – 0.24 | 🟢 Green |
-| Moderate | 0.25 – 0.49 | 🟠 Orange |
-| High     | 0.50 – 0.74 | 🔴 Red   |
-| Extreme  | 0.75 – 1.00 | 🟣 Purple |
+```bash
+# 1. Create venv and install
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# 2. Download live data + calibrate + generate report
+python pipeline.py
+
+# 3. Train the outage prediction model (STEG + incident.tn + weather)
+python train_outage_model.py
+
+# 4. Start API
+uvicorn api:app --host 0.0.0.0 --port 8000
+
+# 5. View 7-day forecast
+curl http://localhost:8000/forecast/outage
+# or open in browser:
+curl http://localhost:8000/forecast/outage/html > forecast.html
+```
+
+---
+
+## API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/health` | Liveness + model phase |
+| `GET` | `/model/info` | Thresholds, weights, ml_ready |
+| `POST` | `/predict` | Single (day, governorate) risk score |
+| `POST` | `/predict/batch` | Up to 200 observations |
+| `POST` | `/report/national/json` | HTML risk report as JSON (for n8n) |
+| `GET` | `/daily/score` | Fetch + score all 24 govs live (n8n daily workflow) |
+| `GET` | `/forecast/governorate?governorate=Sfax&days=7` | 7-day risk forecast, one gov |
+| `GET` | `/forecast/outage?days=7` | 7-day outage forecast, all 7 STEG regions (JSON) |
+| `GET` | `/forecast/outage/html` | Same forecast as HTML email |
+
+---
+
+## Training Data
+
+| Source | Records | Date Range | Granularity |
+|--------|---------|------------|-------------|
+| STEG scrape | 113 outage events | Jul 18 – Aug 6, 2026 | Day × STEG region |
+| incident.tn | 432 rows | Jul 23 – Aug 9, 2026 | Day × governorate (24) |
+| Open-Meteo | 432 rows | Jul 23 – Aug 9, 2026 | Day × governorate (24) |
+
+**Training features:** day of week, month, is_weekend, temp_max/min/mean, rh_max, wind_max, precip, national_reports, region_reports, prev_day_outage, outages_last3
+
+**Model accuracy on training set:** 100% (77 rows — overfitting expected with small dataset; improves as STEG data accumulates)
+
+---
+
+## n8n Workflows
+
+### 1. Daily Risk Pipeline (`workflow.json`)
+Runs at **06:00 UTC** every day:
+- Fetches weather for all 24 governorates + incident.tn stats
+- Scores outage risk (Low/Moderate/High/Extreme) per governorate
+- **Alert email** if any governorate is High or Extreme
+- **Daily summary email** always (top-5 risk table)
+- **Sfax 7-day forecast email** always
+
+### 2. STEG Monitor (`steg_monitor_workflow.json`)
+Runs every **3 hours**:
+- Scrapes `steg.com.tn/fr/news`
+- Filters for electricity outage notices
+- Detects new articles via URL deduplication (static data)
+- Sends email only when a new article appears
+- Currently filtered to **Sfax only** (`SFAX_ONLY = true` in code node)
+
+**Import both into n8n separately** (Workflows → Import from file).
+
+---
+
+## Risk Scoring (Phase 1 — Rule-Based)
+
+| Component | Weight | Signal |
+|-----------|--------|--------|
+| Temperature | 30% | temp_max vs calibrated thresholds (38°C high, 42°C extreme) |
+| Heat stress | 25% | Rothfusz heat index (temp + humidity) |
+| Outage reports | 30% | national incident.tn report volume |
+| Trend | 15% | rising vs 3-day rolling average |
+
+**Risk levels:** Low (0.00–0.24) · Moderate (0.25–0.49) · High (0.50–0.74) · Extreme (0.75–1.00)
+
+Phase 2 (XGBoost) activates automatically when `calibration.json` shows `ml_ready: true` (≥90 real days from incident.tn).
+
+---
+
+## Retrain the Model
+
+```bash
+# After new STEG data is scraped or more incident.tn days accumulate:
+python train_outage_model.py
+
+# Predict only (skip training, use saved model):
+python train_outage_model.py --predict-only
+
+# Refresh live data first:
+python pipeline.py
+python train_outage_model.py
+```
+
+The API serves the forecast from `data/artifacts/outage_forecast_7day.json` — no restart needed after retraining.
