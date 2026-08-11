@@ -2,205 +2,367 @@
   "name": "Tunisia Electricity Risk — Daily Pipeline",
   "nodes": [
     {
-      "id": "1",
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "id": "507ba4af-e77f-447f-a8ee-e89b1e7a0da0",
       "name": "Daily Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [240, 300],
-      "parameters": {
-        "rule": {
-          "interval": [{ "field": "cronExpression", "expression": "0 6 * * *" }]
-        }
-      }
+      "position": [
+        -2288,
+        912
+      ]
     },
     {
-      "id": "2",
+      "parameters": {
+        "url": "http://192.168.1.249:8000/daily/score",
+        "options": {}
+      },
+      "id": "ef7cd448-7f3d-4ebf-9a40-53882c2d71af",
       "name": "Fetch All 24 Governorates",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [500, 160],
-      "parameters": {
-        "method": "GET",
-        "url": "http://192.168.1.17:8000/daily/score",
-        "options": {}
-      }
+      "position": [
+        -2032,
+        784
+      ]
     },
     {
-      "id": "3",
-      "name": "Any High Risk?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [760, 160],
       "parameters": {
         "conditions": {
-          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
           "conditions": [
             {
               "id": "c1",
               "leftValue": "={{ String($json.has_high_risk) }}",
-              "rightValue": "true",
-              "operator": { "type": "string", "operation": "equals" }
+              "rightValue": "false",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
             }
           ],
           "combinator": "and"
-        }
-      }
+        },
+        "options": {}
+      },
+      "id": "1b0da986-c4c2-48ec-a41b-53ae10eb7771",
+      "name": "Any High Risk?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1760,
+        784
+      ]
     },
     {
-      "id": "4",
+      "parameters": {
+        "fromEmail": "={{ $vars.ALERT_FROM || 'abidmohamedyassine00@gmail.com' }}",
+        "toEmail": "={{ $vars.ALERT_EMAIL || 'workerabid001@gmail.com' }}",
+        "subject": "={{ '⚡ HIGH/EXTREME outage risk — ' + $json.date }}",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "5d7e9c10-7e3c-470c-b809-ee4c5548ce5c",
       "name": "Send Alert Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [1020, 60],
-      "parameters": {
-        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
-        "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
-        "subject":   "={{ '⚡ HIGH/EXTREME outage risk — ' + $json.date }}",
-        "emailType": "html",
-        "message":   "={{ $node['Fetch All 24 Governorates'].json.html }}"
-      }
-    },
-    {
-      "id": "5",
-      "name": "No Alert Needed",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [1020, 280],
-      "parameters": {}
-    },
-    {
-      "id": "6",
-      "name": "Build Daily Summary",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [760, 360],
-      "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const d = items[0].json;\nconst date     = d.date || new Date().toISOString().slice(0,10);\nconst national = d.national_reports || 0;\nconst preds    = d.predictions || [];\n\nconst top5 = preds.slice().sort((a,b)=>b.risk_score-a.risk_score).slice(0,5);\nconst highCount = preds.filter(p=>['High','Extreme'].includes(p.risk_level)).length;\n\nconst rows = top5.map(p=>`<tr><td style='padding:8px 12px'><strong>${p.governorate}</strong></td><td style='padding:8px 12px'><span style='background:${p.risk_color};color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem'>${p.risk_level}</span></td><td style='padding:8px 12px'>${p.temp_max}°C</td><td style='padding:8px 12px'>${p.heat_stress}°C</td></tr>`).join('');\n\nconst html = `<!DOCTYPE html><html><head><meta charset='UTF-8'/></head><body style='font-family:Arial,sans-serif;background:#f4f6f9;padding:20px'><div style='max-width:620px;margin:auto'><h2 style='color:#1a1a2e'>📊 Daily Weather & Risk Report</h2><p style='color:#666;font-size:0.85rem;margin-bottom:16px'>${date} · hack-olive</p><table style='width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;margin-bottom:16px'><tr style='background:#1a1a2e;color:#fff'><th style='padding:9px 12px;text-align:left'>Metric</th><th style='padding:9px 12px;text-align:left'>Value</th></tr><tr><td style='padding:8px 12px'>📋 National Outage Reports</td><td style='padding:8px 12px'><strong>${national.toLocaleString()}</strong></td></tr><tr style='background:#fafbfc'><td style='padding:8px 12px'>🏙️ Governorates Scored</td><td style='padding:8px 12px'><strong>${preds.length} / 24</strong></td></tr><tr><td style='padding:8px 12px'>🚨 High/Extreme Risk</td><td style='padding:8px 12px'><strong>${highCount}</strong></td></tr></table><h3 style='font-size:0.95rem;margin-bottom:8px'>Top 5 Risk Governorates</h3><table style='width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden'><tr style='background:#1a1a2e;color:#fff'><th style='padding:8px 12px;text-align:left'>Governorate</th><th style='padding:8px 12px;text-align:left'>Risk</th><th style='padding:8px 12px;text-align:left'>Temp</th><th style='padding:8px 12px;text-align:left'>Heat Index</th></tr>${rows}</table><p style='margin-top:14px;font-size:0.75rem;color:#aaa'>hack-olive · Tunisia Electricity Risk</p></div></body></html>`;\n\nreturn [{json:{subject:`📊 Daily Report — ${date} — ${highCount} high-risk gov(s)`,html}}];"
-      }
-    },
-    {
-      "id": "7",
-      "name": "Send Daily Summary Email",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [1020, 460],
-      "parameters": {
-        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
-        "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
-        "subject":   "={{ $json.subject }}",
-        "emailType": "html",
-        "message":   "={{ $json.html }}"
-      }
-    },
-    {
-      "id": "8",
-      "name": "Fetch Sfax 7-Day Forecast",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [500, 560],
-      "parameters": {
-        "method": "GET",
-        "url": "http://192.168.1.17:8000/forecast/governorate",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            { "name": "governorate", "value": "Sfax" },
-            { "name": "days",        "value": "7" }
-          ]
-        },
-        "options": {}
-      }
-    },
-    {
-      "id": "9",
-      "name": "Send Sfax Forecast Email",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [760, 660],
-      "parameters": {
-        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
-        "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
-        "subject":   "={{ '🔮 Sfax 7-Day Forecast — peak: ' + ($json.peak_risk_level || 'Low') + ' on ' + ($json.peak_risk_day || 'n/a') }}",
-        "emailType": "html",
-        "message":   "={{ $json.html }}"
-      }
-    },
-    {
-      "id": "10",
-      "name": "Fetch Outage Forecast",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [500, 780],
-      "parameters": {
-        "method": "GET",
-        "url": "http://192.168.1.17:8000/forecast/outage/html",
-        "options": {
-          "response": { "response": { "responseFormat": "text" } }
+      "position": [
+        -1504,
+        672
+      ],
+      "webhookId": "036f76d7-dab7-4588-adba-9f6efc3a3e3a",
+      "credentials": {
+        "smtp": {
+          "id": "dcDDSF5yRziMZVqm",
+          "name": "SMTP account"
         }
       }
     },
     {
-      "id": "11",
-      "name": "Build Outage Forecast Email",
+      "parameters": {},
+      "id": "7b4ce717-a8c6-4cab-9f98-cb9946d735db",
+      "name": "No Alert Needed",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -1504,
+        896
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = items[0].json;\nconst date     = d.date || new Date().toISOString().slice(0,10);\nconst national = d.national_reports || 0;\nconst preds    = d.predictions || [];\n\nconst top5 = preds.slice().sort((a,b)=>b.risk_score-a.risk_score).slice(0,5);\nconst highCount = preds.filter(p=>['High','Extreme'].includes(p.risk_level)).length;\n\nconst rows = top5.map(p=>`<tr><td style='padding:8px 12px'><strong>${p.governorate}</strong></td><td style='padding:8px 12px'><span style='background:${p.risk_color};color:#fff;padding:2px 10px;border-radius:12px;font-size:0.8rem'>${p.risk_level}</span></td><td style='padding:8px 12px'>${p.temp_max}°C</td><td style='padding:8px 12px'>${p.heat_stress}°C</td></tr>`).join('');\n\nconst html = `<!DOCTYPE html><html><head><meta charset='UTF-8'/></head><body style='font-family:Arial,sans-serif;background:#f4f6f9;padding:20px'><div style='max-width:620px;margin:auto'><h2 style='color:#1a1a2e'>📊 Daily Weather & Risk Report</h2><p style='color:#666;font-size:0.85rem;margin-bottom:16px'>${date} · hack-olive</p><table style='width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;margin-bottom:16px'><tr style='background:#1a1a2e;color:#fff'><th style='padding:9px 12px;text-align:left'>Metric</th><th style='padding:9px 12px;text-align:left'>Value</th></tr><tr><td style='padding:8px 12px'>📋 National Outage Reports</td><td style='padding:8px 12px'><strong>${national.toLocaleString()}</strong></td></tr><tr style='background:#fafbfc'><td style='padding:8px 12px'>🏙️ Governorates Scored</td><td style='padding:8px 12px'><strong>${preds.length} / 24</strong></td></tr><tr><td style='padding:8px 12px'>🚨 High/Extreme Risk</td><td style='padding:8px 12px'><strong>${highCount}</strong></td></tr></table><h3 style='font-size:0.95rem;margin-bottom:8px'>Top 5 Risk Governorates</h3><table style='width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden'><tr style='background:#1a1a2e;color:#fff'><th style='padding:8px 12px;text-align:left'>Governorate</th><th style='padding:8px 12px;text-align:left'>Risk</th><th style='padding:8px 12px;text-align:left'>Temp</th><th style='padding:8px 12px;text-align:left'>Heat Index</th></tr>${rows}</table><p style='margin-top:14px;font-size:0.75rem;color:#aaa'>hack-olive · Tunisia Electricity Risk</p></div></body></html>`;\n\nreturn [{json:{subject:`📊 Daily Report — ${date} — ${highCount} high-risk gov(s)`,html}}];"
+      },
+      "id": "c57f6b2b-a8e1-4f13-9093-80a74d3964b3",
+      "name": "Build Daily Summary",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [760, 880],
+      "position": [
+        -1760,
+        976
+      ]
+    },
+    {
       "parameters": {
-        "mode": "runOnceForAllItems",
-        "jsCode": "const raw  = items[0].json;\nconst html = typeof raw === 'string' ? raw : (raw.data || raw.body || JSON.stringify(raw));\nconst today = new Date().toISOString().slice(0,10);\nreturn [{json:{subject:`🔮 7-Day Outage Forecast (ML) — ${today}`, html}}];"
+        "fromEmail": "={{ $vars.ALERT_FROM || 'abidmohamedyassine00@gmail.com' }}",
+        "toEmail": "={{ $vars.ALERT_EMAIL || 'workerabid001@gmail.com' }}",
+        "subject": "={{ $json.subject }}",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "00c30235-8903-40f4-9f63-f494d90a4f1c",
+      "name": "Send Daily Summary Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -1504,
+        1072
+      ],
+      "webhookId": "3313ddca-6a74-4dce-9369-fd36782c4849",
+      "credentials": {
+        "smtp": {
+          "id": "dcDDSF5yRziMZVqm",
+          "name": "SMTP account"
+        }
       }
     },
     {
-      "id": "12",
+      "parameters": {
+        "url": "http://192.168.1.249:8000/forecast/governorate",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "governorate",
+              "value": "Sfax"
+            },
+            {
+              "name": "days",
+              "value": "7"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3e539565-3171-41a1-a1c8-d7195ee87290",
+      "name": "Fetch Sfax 7-Day Forecast",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2032,
+        1184
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $vars.ALERT_FROM || 'abidmohamedyassine00@gmail.com' }}",
+        "toEmail": "={{ $vars.ALERT_EMAIL || 'workerabid001@gmail.com' }}",
+        "subject": "={{ '🔮 Sfax 7-Day Forecast — peak: ' + ($json.peak_risk_level || 'Low') + ' on ' + ($json.peak_risk_day || 'n/a') }}",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "daddb94b-d1fc-4982-ae92-27ba3cc20567",
+      "name": "Send Sfax Forecast Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -1760,
+        1280
+      ],
+      "webhookId": "b78c69e2-3f12-4acc-90aa-69ec5918d0d9",
+      "credentials": {
+        "smtp": {
+          "id": "dcDDSF5yRziMZVqm",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "http://192.168.1.249:8000/forecast/outage/html",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "405d7a7c-c7f8-4994-a584-f6f4928c976d",
+      "name": "Fetch Outage Forecast",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2032,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw  = items[0].json;\nconst html = typeof raw === 'string' ? raw : (raw.data || raw.body || JSON.stringify(raw));\nconst today = new Date().toISOString().slice(0,10);\nreturn [{json:{subject:`🔮 7-Day Outage Forecast (ML) — ${today}`, html}}];"
+      },
+      "id": "0dd77318-ce29-4097-be17-0118359f3105",
+      "name": "Build Outage Forecast Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1760,
+        1504
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $vars.ALERT_FROM || 'abidmohamedyassine00@gmail.com' }}",
+        "toEmail": "={{ $vars.ALERT_EMAIL || 'workerabid001@gmail.com' }}",
+        "subject": "={{ $json.subject }}",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "ff78f1e8-efdb-4862-9f49-fa4b49a83e16",
       "name": "Send Outage Forecast Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [1020, 980],
-      "parameters": {
-        "fromEmail": "={{ $vars.ALERT_FROM || 'alerts@hack-olive.tn' }}",
-        "toEmail":   "={{ $vars.ALERT_EMAIL || 'admin@hack-olive.tn' }}",
-        "subject":   "={{ $json.subject }}",
-        "emailType": "html",
-        "message":   "={{ $json.html }}"
+      "position": [
+        -1504,
+        1600
+      ],
+      "webhookId": "b30bb77b-7f60-4605-b334-1244be44610a",
+      "credentials": {
+        "smtp": {
+          "id": "dcDDSF5yRziMZVqm",
+          "name": "SMTP account"
+        }
       }
     }
   ],
+  "pinData": {},
   "connections": {
     "Daily Trigger": {
-      "main": [[
-        { "node": "Fetch All 24 Governorates", "type": "main", "index": 0 },
-        { "node": "Fetch Sfax 7-Day Forecast", "type": "main", "index": 0 },
-        { "node": "Fetch Outage Forecast",     "type": "main", "index": 0 }
-      ]]
+      "main": [
+        [
+          {
+            "node": "Fetch All 24 Governorates",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Sfax 7-Day Forecast",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Outage Forecast",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Fetch All 24 Governorates": {
-      "main": [[
-        { "node": "Any High Risk?",      "type": "main", "index": 0 },
-        { "node": "Build Daily Summary", "type": "main", "index": 0 }
-      ]]
+      "main": [
+        [
+          {
+            "node": "Any High Risk?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Build Daily Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Any High Risk?": {
       "main": [
-        [{ "node": "Send Alert Email",  "type": "main", "index": 0 }],
-        [{ "node": "No Alert Needed",   "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Send Alert Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Alert Needed",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Build Daily Summary": {
-      "main": [[{ "node": "Send Daily Summary Email", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Send Daily Summary Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Fetch Sfax 7-Day Forecast": {
-      "main": [[{ "node": "Send Sfax Forecast Email", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Send Sfax Forecast Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Fetch Outage Forecast": {
-      "main": [[{ "node": "Build Outage Forecast Email", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Build Outage Forecast Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Build Outage Forecast Email": {
-      "main": [[{ "node": "Send Outage Forecast Email", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Send Outage Forecast Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "settings": { "executionOrder": "v1" },
-  "staticData": null,
-  "tags": [],
-  "triggerCount": 0
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "53da1736-b3ea-4502-b4b6-4562527a65b9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7b0039222f9b400b2cae145c4f5c64c054cf479845ee7b841f8eeb59a86b89cd"
+  },
+  "nodeGroups": [],
+  "id": "yITumLMorWYVi8fJ",
+  "tags": []
 }
