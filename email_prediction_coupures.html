@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prévision Coupures Électriques — Tunisie</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 24px;
+      color: #1a1a2e;
+    }
+    .container { max-width: 700px; margin: auto; }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      padding: 24px 28px;
+      border-radius: 12px 12px 0 0;
+    }
+    .header h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    .header p  { font-size: 0.82rem; opacity: 0.75; }
+
+    /* Alert banner */
+    .alert-banner {
+      background: #b71c1c;
+      color: #fff;
+      padding: 12px 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Stats row */
+    .stats {
+      display: flex;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .stat {
+      flex: 1;
+      padding: 16px 20px;
+      text-align: center;
+      border-right: 1px solid #eee;
+    }
+    .stat:last-child { border-right: none; }
+    .stat .val  { font-size: 1.8rem; font-weight: 700; color: #1a1a2e; }
+    .stat .lbl  { font-size: 0.72rem; color: #888; margin-top: 2px; }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    th {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.85rem;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: #fafbfc; }
+    tr.day-header td {
+      background: #e8eaf6;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #3949ab;
+      padding: 8px 14px;
+    }
+
+    /* Probability pill */
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .pill.extreme { background: #7b1fa2; }
+    .pill.high    { background: #f44336; }
+    .pill.medium  { background: #ff9800; }
+    .pill.low     { background: #4caf50; }
+
+    /* Progress bar */
+    .prob-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bar-track {
+      flex: 1;
+      height: 8px;
+      background: #eee;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .bar-fill { height: 100%; border-radius: 4px; }
+
+    /* Footer */
+    .footer {
+      background: #fff;
+      border-radius: 0 0 12px 12px;
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: #aaa;
+      border-top: 1px solid #eee;
+    }
+    .footer a { color: #aaa; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>⚡ Prévision des Coupures Électriques — 7 Jours</h1>
+    <p>
+      Générée le <strong>{{DATE_GENERATION}}</strong> &nbsp;·&nbsp;
+      Modèle : <strong>XGBoost v1 · STEG + incident.tn + Open-Meteo</strong>
+    </p>
+  </div>
+
+  <!-- Alert banner (shown only if high risk days exist) -->
+  <div class="alert-banner">
+    🚨 Risque élevé prévu les : {{JOURS_RISQUE_ELEVE}}
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats">
+    <div class="stat">
+      <div class="val">{{NB_JOURS}}</div>
+      <div class="lbl">Jours analysés</div>
+    </div>
+    <div class="stat">
+      <div class="val" style="color:#f44336">{{NB_REGIONS_RISQUE}}</div>
+      <div class="lbl">Régions à risque</div>
+    </div>
+    <div class="stat">
+      <div class="val">{{NB_RAPPORTS}}</div>
+      <div class="lbl">Rapports nationaux (hier)</div>
+    </div>
+    <div class="stat">
+      <div class="val">{{TEMP_MAX}}°C</div>
+      <div class="lbl">Temp. max prévue</div>
+    </div>
+  </div>
+
+  <!-- Forecast table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Région</th>
+        <th>Probabilité</th>
+        <th>Fenêtre prévue</th>
+        <th>🌡️ Temp</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Example rows — replaced dynamically by API -->
+
+      <tr class="day-header">
+        <td colspan="5">📅 2026-08-12 — Mardi</td>
+      </tr>
+      <tr>
+        <td>2026-08-12</td>
+        <td>جهة الجنوب — Sud</td>
+        <td>
+          <div class="prob-bar">
+            <span class="pill high">82%</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:82%;background:#f44336"></div>
+            </div>
+          </div>
+        </td>
+        <td>12:00 – 14:00</td>
+        <td>34°C</td>
+      </tr>
+
+      <tr class="day-header">
+        <td colspan="5">📅 2026-08-14 — Jeudi</td>
+      </tr>
+      <tr>
+        <td>2026-08-14</td>
+        <td>جهة الجنوب — Sud</td>
+        <td>
+          <div class="prob-bar">
+            <span class="pill extreme">94%</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:94%;background:#7b1fa2"></div>
+            </div>
+          </div>
+        </td>
+        <td>11:00 – 13:00</td>
+        <td>32°C</td>
+      </tr>
+      <tr>
+        <td>2026-08-14</td>
+        <td>جهة الجنوب الغربي — Sud-Ouest</td>
+        <td>
+          <div class="prob-bar">
+            <span class="pill high">86%</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:86%;background:#f44336"></div>
+            </div>
+          </div>
+        </td>
+        <td>15:00 – 17:00</td>
+        <td>39°C</td>
+      </tr>
+      <tr>
+        <td>2026-08-14</td>
+        <td>ولاية صفاقس — Sfax</td>
+        <td>
+          <div class="prob-bar">
+            <span class="pill high">76%</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:76%;background:#f44336"></div>
+            </div>
+          </div>
+        </td>
+        <td>11:00 – 13:00</td>
+        <td>33°C</td>
+      </tr>
+
+      <tr class="day-header">
+        <td colspan="5">📅 2026-08-16 — Dimanche</td>
+      </tr>
+      <tr>
+        <td>2026-08-16</td>
+        <td>جهة الشمال — Nord</td>
+        <td>
+          <div class="prob-bar">
+            <span class="pill extreme">94%</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:94%;background:#7b1fa2"></div>
+            </div>
+          </div>
+        </td>
+        <td>11:00 – 13:00</td>
+        <td>36°C</td>
+      </tr>
+      <tr>
+        <td>2026-08-16</td>
+        <td>جهة الجنوب الغربي — Sud-Ouest</td>
+        <td>
+          <div class="prob-bar">
+            <span class="pill extreme">91%</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:91%;background:#7b1fa2"></div>
+            </div>
+          </div>
+        </td>
+        <td>16:00 – 18:00</td>
+        <td>42°C</td>
+      </tr>
+      <tr>
+        <td>2026-08-16</td>
+        <td>ولاية صفاقس — Sfax</td>
+        <td>
+          <div class="prob-bar">
+            <span class="pill extreme">90%</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:90%;background:#7b1fa2"></div>
+            </div>
+          </div>
+        </td>
+        <td>11:00 – 13:00</td>
+        <td>33°C</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- Footer -->
+  <div class="footer">
+    hack-olive · Système de Prédiction des Coupures Électriques &nbsp;·&nbsp;
+    Données : <a href="https://www.steg.com.tn">STEG</a>,
+    <a href="https://incident.tn">incident.tn</a>,
+    <a href="https://open-meteo.com">Open-Meteo ERA5</a>
+    &nbsp;·&nbsp; Généré automatiquement via n8n
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,8 +1,6 @@
-version: "3.9"
-
 services:
 
-  # ── Risk prediction API ──────────────────────────────────────────────
+  # ── Risk API + ML model ───────────────────────────────────────────────
   risk-api:
     build:
       context: ..
@@ -12,9 +10,11 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      # Live-writable directories mounted from host
       - ../data/raw:/app/data/raw
       - ../data/processed:/app/data/processed
       - ../data/artifacts:/app/data/artifacts
+      - ../data/steg-outage-data/data/processed:/app/data/steg-outage-data/data/processed
     environment:
       - INCIDENT_BASE=https://api.incident.tn/api/v1
       - METEO_ARCHIVE_BASE=https://archive-api.open-meteo.com/v1/archive
@@ -42,10 +42,11 @@ services:
       - N8N_PORT=5678
       - N8N_PROTOCOL=http
       - WEBHOOK_URL=http://localhost:5678/
-      - ALERT_EMAIL=ops@hack-olive.tn
     volumes:
       - n8n_data:/home/node/.n8n
-      - ../n8n:/home/node/.n8n/workflows:ro
+    extra_hosts:
+      # Allows n8n container to reach the risk-api on the host network
+      - "host.docker.internal:host-gateway"
     depends_on:
       risk-api:
         condition: service_healthy

@@ -1,0 +1,12 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
+.git
+.gitignore
+_src_archive
+data/raw/*
+notebooks
+*.log
+docker/
+n8n/

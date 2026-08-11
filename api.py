@@ -350,6 +350,124 @@ def forecast_outage_html(days: int = 7):
     return HTMLResponse(html)
 
 
+# ── STEG article persistence ──────────────────────────────────────────────
+
+class StegSaveRequest(BaseModel):
+    articles: list[dict]
+    scraped_at: str = ""
+
+
+@app.post("/steg/save-article", tags=["steg"])
+def steg_save_article(body: StegSaveRequest):
+    """
+    Called by n8n whenever a new STEG outage article is detected.
+    Appends the article(s) to data/steg-outage-data/data/processed/steg_live.csv
+    so the dataset grows automatically without manual scraping.
+    Returns whether a retraining threshold was crossed.
+    """
+    import csv
+    from pathlib import Path
+    from datetime import datetime as dt_
+
+    out_path = Path("data/steg-outage-data/data/processed/steg_live.csv")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    fieldnames = ["scraped_at", "date", "title", "url"]
+    write_header = not out_path.exists()
+
+    # Count existing rows before appending
+    existing = 0
+    if out_path.exists():
+        with open(out_path, encoding="utf-8") as f:
+            existing = sum(1 for _ in f) - 1  # subtract header
+
+    saved = 0
+    with open(out_path, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        if write_header:
+            writer.writeheader()
+        for a in body.articles:
+            writer.writerow({
+                "scraped_at": body.scraped_at or dt_.now().isoformat(),
+                "date":       a.get("date", ""),
+                "title":      a.get("title", ""),
+                "url":        a.get("url", ""),
+            })
+            saved += 1
+
+    total_after = existing + saved
+
+    # Check if we crossed a multiple-of-30 threshold
+    RETRAIN_EVERY = 30
+    prev_bucket = existing // RETRAIN_EVERY
+    new_bucket  = total_after // RETRAIN_EVERY
+    should_retrain = new_bucket > prev_bucket
+
+    log.info("Saved %d STEG articles (total=%d, retrain=%s)", saved, total_after, should_retrain)
+    return {
+        "saved":          saved,
+        "total":          total_after,
+        "should_retrain": should_retrain,
+        "next_retrain_at": ((new_bucket + 1) * RETRAIN_EVERY),
+        "file":           str(out_path),
+    }
+
+
+@app.post("/model/retrain", tags=["model"])
+def retrain_model():
+    """
+    Triggers a full model retrain: pipeline refresh + train_outage_model.
+    Called automatically by n8n when should_retrain=true.
+    Runs synchronously — expect 30–60s response time.
+    """
+    import subprocess, sys
+    from datetime import datetime as dt_
+
+    log.info("Retraining triggered via API...")
+    start = dt_.now()
+
+    results = {}
+
+    # Step 1: refresh incident.tn + weather data
+    r1 = subprocess.run(
+        [sys.executable, "pipeline.py", "--skip-download"],
+        capture_output=True, text=True, cwd="."
+    )
+    results["pipeline"] = {
+        "returncode": r1.returncode,
+        "stdout": r1.stdout[-500:] if r1.stdout else "",
+        "stderr": r1.stderr[-300:] if r1.stderr else "",
+    }
+
+    # Step 2: retrain outage model
+    r2 = subprocess.run(
+        [sys.executable, "train_outage_model.py"],
+        capture_output=True, text=True, cwd="."
+    )
+    results["train"] = {
+        "returncode": r2.returncode,
+        "stdout": r2.stdout[-500:] if r2.stdout else "",
+        "stderr": r2.stderr[-300:] if r2.stderr else "",
+    }
+
+    duration = (dt_.now() - start).total_seconds()
+    success  = r1.returncode == 0 and r2.returncode == 0
+
+    # Reload scorer to pick up new calibration
+    global _scorer
+    if success:
+        _scorer = RiskScorer()
+        log.info("Scorer reloaded after retrain")
+
+    log.info("Retrain complete in %.1fs — success=%s", duration, success)
+    return {
+        "success":      success,
+        "duration_s":   round(duration, 1),
+        "trained_at":   dt_.now().isoformat(),
+        "steps":        results,
+    }
+
+
 @app.get("/forecast/governorate", tags=["live"])
 def forecast_governorate(governorate: str = "Sfax", days: int = 7):
     """
