@@ -1,112 +1,112 @@
-# 🔌 STEG Electricity Outage Data Scraper
+# 🔌 Scraper de Données de Coupures Électriques STEG
 
-A complete web scraper that automatically collects electricity outage announcements from the STEG website and converts them into clean, structured data (CSV, Excel, JSON).
+Un scraper web complet qui collecte automatiquement les annonces de coupures électriques du site STEG et les convertit en données structurées et propres (CSV, Excel, JSON).
 
-**Perfect for beginners!** This guide explains everything step-by-step with easy-to-understand diagrams.
-
----
-
-## 📚 Table of Contents
-
-1. [What Does This Do?](#what-does-this-do)
-2. [How It Works - Complete Methodology](#how-it-works---complete-methodology)
-3. [Project Structure](#project-structure)
-4. [Data Output](#data-output)
-5. [Installation & Usage](#installation--usage)
-6. [Understanding the Code](#understanding-the-code)
-7. [Troubleshooting](#troubleshooting)
+**Parfait pour les débutants !** Ce guide explique tout étape par étape avec des diagrammes faciles à comprendre.
 
 ---
 
-## 🎯 What Does This Do?
+## 📚 Table des Matières
 
-This scraper automatically:
-1. **Visits** the STEG website (Tunisia's electricity company)
-2. **Finds** all electricity outage announcements (in Arabic)
-3. **Extracts** important information like:
-   - When is the outage? (date)
-   - What time does it start? 
-   - What time does it end?
-   - Which region? (جهة الشمال, جهة الجنوب, etc.)
-   - Which areas are affected?
-4. **Saves** everything in easy-to-use formats (Excel, CSV, JSON)
-
-**Result**: Instead of reading 113 Arabic announcements manually, you get a clean spreadsheet! 📊
+1. [Que Fait Ce Programme ?](#que-fait-ce-programme)
+2. [Comment Ça Marche - Méthodologie Complète](#comment-ça-marche---méthodologie-complète)
+3. [Structure du Projet](#structure-du-projet)
+4. [Données en Sortie](#données-en-sortie)
+5. [Installation & Utilisation](#installation--utilisation)
+6. [Comprendre le Code](#comprendre-le-code)
+7. [Dépannage](#dépannage)
 
 ---
 
-## 🔄 How It Works - Complete Methodology
+## 🎯 Que Fait Ce Programme ?
 
-### The Big Picture
+Ce scraper automatiquement :
+1. **Visite** le site STEG (compagnie d'électricité tunisienne)
+2. **Trouve** toutes les annonces de coupures électriques (en arabe)
+3. **Extrait** les informations importantes comme :
+   - Quand est la coupure ? (date)
+   - À quelle heure commence-t-elle ? 
+   - À quelle heure se termine-t-elle ?
+   - Quelle région ? (جهة الشمال, جهة الجنوب, etc.)
+   - Quelles zones sont affectées ?
+4. **Sauvegarde** tout dans des formats faciles à utiliser (Excel, CSV, JSON)
+
+**Résultat** : Au lieu de lire 113 annonces arabes manuellement, vous obtenez un tableur propre ! 📊
+
+---
+
+## 🔄 Comment Ça Marche - Méthodologie Complète
+
+### Vue d'Ensemble
 
 ```
 ┌─────────────┐      ┌──────────────┐      ┌─────────────┐      ┌──────────────┐
-│   STEG      │      │   Download   │      │   Extract   │      │   Save to    │
-│  Website    │ ───> │   HTML       │ ───> │   Data      │ ───> │   Files      │
-│  (Arabic)   │      │   Pages      │      │   (Parse)   │      │ (CSV/Excel)  │
+│   Site      │      │ Télécharge   │      │  Extrait    │      │ Sauvegarde   │
+│   STEG      │ ───> │   Pages      │ ───> │  Données    │ ───> │   Fichiers   │
+│  (Arabe)    │      │   HTML       │      │  (Analyse)  │      │ (CSV/Excel)  │
 └─────────────┘      └──────────────┘      └─────────────┘      └──────────────┘
 ```
 
-### Step-by-Step Process
+### Processus Étape par Étape
 
-#### 📥 **STEP 1: Discovery** (Finding Articles)
+#### 📥 **ÉTAPE 1 : Découverte** (Trouver les Articles)
 
 ```
-STEG Website
+Site Web STEG
     ↓
 ┌─────────────────────────────────────────┐
-│  News Listing Page                      │
+│  Page de Liste d'Actualités             │
 │  ┌─────────────────────────────────┐   │
-│  │ إشعار بانقطاع الكهرباء - جهة...  │   │  ← Outage announcement ✅
+│  │ إشعار بانقطاع الكهرباء - جهة...  │   │  ← Annonce de coupure ✅
 │  ├─────────────────────────────────┤   │
-│  │ مناظرة خارجية للإنتداب...       │   │  ← Job posting ❌ (filtered)
+│  │ مناظرة خارجية للإنتداب...       │   │  ← Offre d'emploi ❌ (filtré)
 │  ├─────────────────────────────────┤   │
-│  │ إشعار بانقطاع الكهرباء - جهة...  │   │  ← Outage announcement ✅
+│  │ إشعار بانقطاع الكهرباء - جهة...  │   │  ← Annonce de coupure ✅
 │  └─────────────────────────────────┘   │
 └─────────────────────────────────────────┘
-    ↓ Filter: Keep only "إشعار بانقطاع الكهرباء"
+    ↓ Filtre : Garde seulement "إشعار بانقطاع الكهرباء"
     ↓
 ┌─────────────────────────────────────────┐
-│  Filtered List: 113 outage articles    │
+│  Liste Filtrée : 113 articles           │
 └─────────────────────────────────────────┘
 ```
 
-**What happens:**
-- Opens STEG news page (page 1, 2, 3, etc.)
-- Looks at each article title
-- **Filters**: Only keeps articles with "إشعار بانقطاع الكهرباء" (outage announcement)
-- **Ignores**: Job postings, studies, other news
-- Collects all article URLs
+**Ce qui se passe :**
+- Ouvre la page d'actualités STEG (page 1, 2, 3, etc.)
+- Regarde chaque titre d'article
+- **Filtre** : Garde seulement les articles avec "إشعار بانقطاع الكهرباء" (annonce de coupure)
+- **Ignore** : Offres d'emploi, études, autres actualités
+- Collecte toutes les URLs d'articles
 
 ---
 
-#### 📥 **STEP 2: Download** (Getting Full Content)
+#### 📥 **ÉTAPE 2 : Téléchargement** (Récupération du Contenu Complet)
 
 ```
-For each article URL:
+Pour chaque URL d'article :
     ↓
 ┌─────────────────────────────────────────┐
-│  Download HTML page                     │
-│  (Wait 1.5-3 seconds to be polite)     │
+│  Télécharge la page HTML                │
+│  (Attend 1,5-3 secondes pour être poli) │
 └─────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────┐
-│  Save to: data/raw/html/abc123.html    │
-│  (Backup for later)                     │
+│  Sauvegarde dans : data/raw/html/abc123.html │
+│  (Backup pour plus tard)                │
 └─────────────────────────────────────────┘
 ```
 
-**What happens:**
-- Downloads the full announcement page
-- Waits 1.5-3 seconds between downloads (to be nice to the server)
-- Saves HTML to `data/raw/html/` folder
-- Why save HTML? So we can re-process later without re-downloading!
+**Ce qui se passe :**
+- Télécharge la page d'annonce complète
+- Attend 1,5-3 secondes entre les téléchargements (pour être gentil avec le serveur)
+- Sauvegarde le HTML dans le dossier `data/raw/html/`
+- Pourquoi sauvegarder le HTML ? Pour pouvoir re-traiter plus tard sans re-télécharger !
 
 ---
 
-#### 🔍 **STEP 3: Extract Data** (Parsing Arabic Text)
+#### 🔍 **ÉTAPE 3 : Extraction de Données** (Analyse du Texte Arabe)
 
-This is the most complex part! The Arabic text looks like this:
+C'est la partie la plus complexe ! Le texte arabe ressemble à ça :
 
 ```
 في إطار الحفاظ على سلامة و ديمومة المنظومة الكهربائية،
@@ -117,24 +117,24 @@ This is the most complex part! The Arabic text looks like this:
 سوسة، المنستير، صفاقس
 ```
 
-**The parser extracts:**
+**L'analyseur extrait :**
 
 ```
 ┌──────────────────────────────────────┐
-│  Arabic Text (Announcement)          │
+│  Texte Arabe (Annonce)               │
 └──────────────────────────────────────┘
            ↓
     ┌──────┴──────┐
-    │   PARSER    │
+    │  ANALYSEUR  │
     └──────┬──────┘
            ↓
 ┌──────────────────────────────────────┐
-│  Structured Data:                    │
-│  • Date: 2026-07-21                  │
-│  • Start: 06:00                      │
-│  • End: 12:00                        │
-│  • Region: جهة الوسط                 │
-│  • Areas: سوسة; المنستير; صفاقس     │
+│  Données Structurées :               │
+│  • Date : 2026-07-21                 │
+│  • Début : 06:00                     │
+│  • Fin : 12:00                       │
+│  • Région : جهة الوسط                │
+│  • Zones : سوسة; المنستير; صفاقس    │
 └──────────────────────────────────────┘
 ```
 
@@ -553,7 +553,7 @@ This uses the saved HTML files in `data/raw/html/`
 
 ## 📝 License
 
-This project is for educational purposes. Please respect STEG's terms of service and use the data responsibly.
+This project is for educational purposes.
 
 ---
 

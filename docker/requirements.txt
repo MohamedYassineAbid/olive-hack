@@ -13,8 +13,9 @@ pandas>=2.2.2
 numpy>=2.0.0
 pyarrow>=17.0.0
 
-# ML (Phase 1 only needs scikit-learn; xgboost is Phase 2)
+# ML
 scikit-learn>=1.5.0
+xgboost==2.0.3
 
 # Templating
 jinja2>=3.1.4

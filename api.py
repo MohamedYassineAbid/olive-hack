@@ -1,5 +1,8 @@
 """
-api.py — FastAPI app, all endpoints.
+api.py — OliveVolt FastAPI app, all endpoints.
+
+OliveVolt: Voltage predictions powered by Olivesoft
+Tunisia Electricity Outage Risk System
 
 Run:
     uvicorn api:app --reload --port 8000

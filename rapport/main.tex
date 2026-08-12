@@ -1,0 +1,275 @@
+% !TeX program = xelatex
+\documentclass[10pt,a4paper]{article}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\setotherlanguage{arabic}
+\usepackage{fontspec}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\symbolfont{DejaVu Sans}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+
+% MARGES TRÈS RÉDUITES pour garantir 2 pages
+\geometry{a4paper, left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm}
+
+% Couleurs
+\definecolor{olivegreen}{RGB}{107,142,35}
+\definecolor{electricblue}{RGB}{0,121,241}
+
+% En-tête minimal
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{OliveVolt}}
+\fancyhead[R]{\small Hackathon Olive 2026}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+% Hyperref
+\hypersetup{colorlinks=true, linkcolor=electricblue, urlcolor=electricblue}
+
+% Réduire DRASTIQUEMENT les espacements
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{6pt}{3pt}
+\titlespacing*{\subsection}{0pt}{4pt}{2pt}
+\titleformat{\section}{\normalsize\bfseries\color{olivegreen}}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection}{0.5em}{}
+
+% Listes ultra-compactes
+\setlist[itemize]{noitemsep, topsep=1pt, leftmargin=10pt, itemsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=1pt, leftmargin=10pt, itemsep=0pt}
+
+% Réduire l'espace autour des tcolorbox
+\tcbset{boxsep=2pt, left=3pt, right=3pt, top=2pt, bottom=2pt}
+
+\begin{document}
+
+% TITRE ULTRA-COMPACT
+\begin{center}
+\vspace*{-1cm}
+{\Large\bfseries\color{olivegreen} OliveVolt {\symbolfont ⚡}}\par
+\vspace{0.05cm}
+{\small\itshape Voltage predictions powered by Olivesoft}\par
+\vspace{0.1cm}
+{\normalsize Système de Prédiction des Coupures Électriques en Tunisie}\par
+\vspace{0.05cm}
+{\footnotesize Hackathon Olive 2026 · Ahmed Bensalah - Mohamed Yassine Abid - Ahmed Messoudi - Mohamed Chaabouni}\par
+\end{center}
+\vspace{0.1cm}
+
+% INTRODUCTION
+\section*{Introduction}
+\vspace{-2pt}
+
+\textbf{Problématique :} Les coupures électriques en Tunisie impactent directement Olivesoft (interruptions services, corruption données, coûts solutions de secours).
+
+\textbf{Solution OliveVolt :} Système d'alerte précoce anticipant les coupures jusqu'à 7 jours à l'avance via analyse de 3 sources de données.
+
+\textbf{Statut :} Prototype fonctionnel v1.0 — Phase 1 active, conçu pour les 24 gouvernorats.
+
+% SECTION 1
+\section{Collecte des Données STEG}
+\vspace{-2pt}
+
+\subsection*{Le Défi}
+La STEG publie ses annonces en arabe (\textarabic{إشعار بانقطاع الكهرباء}), sans API, mélangées avec d'autres actualités.
+
+\subsection*{Notre Approche}
+
+\textbf{Scraping intelligent en 4 étapes :}
+\begin{enumerate}
+\item \textbf{Découverte} — Filtrage automatique des annonces (\textarabic{إشعار بانقطاع الكهرباء})
+\item \textbf{Extraction} — Analyse du texte arabe : 
+    \begin{itemize}
+    \item Dates : \textarabic{21 جويلية 2026} → 2026-07-21
+    \item Heures : \textarabic{منتصف النهار} → 12:00, \textarabic{العاشرة ليلا} → 22:00
+    \item Régions : \textarabic{جهة الشمال} (Nord), \textarabic{جهة الجنوب} (Sud), \textarabic{جهة صفاقس} (Sfax)
+    \end{itemize}
+\item \textbf{Validation} — 8 règles de contrôle qualité + déduplication
+\item \textbf{Export} — CSV, Excel, JSON
+\end{enumerate}
+
+\textbf{Résultat :} 113 événements, gestion fautes (\textarabic{منتصف النهر} → \textarabic{منتصف النهار}).
+
+% SECTION 2
+\section{Intelligence Artificielle et MLOps}
+\vspace{-2pt}
+
+\subsection*{Architecture Hybride Progressive}
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Phase} & \textbf{Méthode} & \textbf{Activation} \\
+\midrule
+Phase 1 & Règles calibrées & Dès le 1\textsuperscript{er} jour \\
+Phase 2 & XGBoost (ML) & Auto $\geq$ 90 jours \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Sources de Données Croisées}
+
+\begin{itemize}
+\item \textbf{STEG} (scraping) — Annonces officielles, toutes les 3h
+\item \textbf{incident.tn} (API) — Rapports citoyens, 24 gouvernorats
+\item \textbf{Open-Meteo} (API) — Météo ERA5 + prévisions 7 jours
+\end{itemize}
+
+\textbf{Dataset :} 113 événements STEG + 432 lignes météo/incidents
+
+\subsection*{Modèle XGBoost}
+
+\textbf{13 variables :} Calendrier (jour, mois, weekend) · Météo (temp, humidité, vent, précip) · Incidents (rapports nationaux/région, historique)
+
+\textbf{2 modèles :} Classificateur (probabilité 0–1) + Régresseur (heure de début 0–23h)
+
+\subsection*{MLOps Automatique}
+
+\textbf{Principe :} Tous les 30 nouveaux articles STEG → Réentraînement automatique sans intervention humaine ni redémarrage. Nouveau modèle actif immédiatement.
+
+% SECTION 3
+\section{Automatisation avec n8n}
+\vspace{-2pt}
+
+n8n orchestre l'ensemble via \textbf{2 workflows} :
+
+\subsection*{Workflow 1 — Quotidien (06h00 UTC)}
+
+\begin{enumerate}
+\item Récupération données (incident.tn + Open-Meteo)
+\item Calcul score de risque 24 gouvernorats
+\item Génération prévisions 7 jours
+\item Envoi 4 emails : Alerte (si risque élevé) · Résumé · Prévision météo · Prévision ML
+\end{enumerate}
+
+\subsection*{Workflow 2 — Surveillance STEG (/3h)}
+
+\begin{enumerate}
+\item Scraping STEG + déduplication URL
+\item Si nouvel article : Sauvegarde DB + Email alerte + Check MLOps (×30) → Réentraînement auto
+\end{enumerate}
+
+\subsection*{Niveaux de Risque}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{llp{4cm}}
+\toprule
+\textbf{Niveau} & \textbf{Score} & \textbf{Action} \\
+\midrule
+Low & 0.00–0.24 & Aucune \\
+Moderate & 0.25–0.49 & Surveillance \\
+High & 0.50–0.74 & Alerte + mesures préventives \\
+Extreme & 0.75–1.00 & Alerte prioritaire + secours \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Déploiement}
+
+\textbf{Docker :} 2 conteneurs (olivevolt-api + olivevolt-n8n) via Docker Compose. Installation simple, démarrage automatique.
+
+% CONCLUSION
+\section*{Conclusion}
+\vspace{-2pt}
+
+\begin{tcolorbox}[colback=olivegreen!10,colframe=olivegreen,boxrule=0.6pt]
+\small
+\textbf{OliveVolt transforme la gestion des coupures pour Olivesoft :}
+\begin{itemize}
+\item \textbf{Anticipation} — 7 jours vs quelques heures
+\item \textbf{Autonomie} — Zéro intervention, auto-apprenant
+\item \textbf{Réactivité} — Alertes immédiates STEG
+\item \textbf{Évolutivité} — Montée en puissance auto
+\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Métriques}
+
+\begin{multicols}{2}
+\footnotesize
+\textbf{Données :}
+\begin{itemize}
+\item 113 événements STEG
+\item 24 gouvernorats couverts
+\item 19 jours de données
+\end{itemize}
+
+\columnbreak
+
+\textbf{Performance :}
+\begin{itemize}
+\item 100\% autonome
+\item 5 emails/jour
+\item Phase 2 ML auto $\geq$90j
+\end{itemize}
+\end{multicols}
+
+\subsection*{Architecture et Interfaces Clés}
+
+\begin{itemize}
+\item \textbf{FastAPI (:8000)} — API de scoring, prévision et pilotage du modèle : \texttt{/health}, \texttt{/daily/score}, \texttt{/forecast/outage}, \texttt{/model/retrain}
+\item \textbf{n8n (:5678)} — Planification, appels API, conditions d'alerte et diffusion des emails
+\item \textbf{Moteur Python} — Fusion des données, création des 13 variables, calibration et inférence
+\end{itemize}
+\vspace{0.3cm}
+
+\subsection*{Capacités de l'API}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{lp{4.1cm}p{5.2cm}}
+\toprule
+\textbf{Endpoint} & \textbf{Fonction} & \textbf{Sortie} \\
+\midrule
+\texttt{/daily/score} & Scoring national en direct & Risque des 24 gouvernorats \\
+\texttt{/forecast/governorate} & Prévision locale & Scores, météo et tendance sur 7 jours \\
+\texttt{/forecast/outage} & Inférence XGBoost & Probabilité et heure estimée par région \\
+\texttt{/predict/batch} & Traitement groupé & Jusqu'à 200 observations par requête \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.3cm}
+
+\subsection*{Sorties Opérationnelles}
+
+\begin{itemize}
+\item \textbf{Alerte conditionnelle} — Email immédiat si le risque atteint High ou Extreme
+\item \textbf{Rapport quotidien} — Vue nationale et top 5 des gouvernorats les plus exposés
+\item \textbf{Prévisions} — Tendances météo et probabilités de coupure sur 7 jours
+\item \textbf{Veille officielle} — Notification dédiée pour chaque nouvel avis STEG détecté
+\end{itemize}
+\vspace{0.3cm}
+
+\subsection*{Fiabilité et Traçabilité}
+
+\begin{itemize}
+\item \textbf{Déduplication par URL} — Un avis STEG ne génère jamais deux notifications
+\item \textbf{Contrôle de disponibilité} — \texttt{/health} expose l'état du service et la phase active
+\item \textbf{Artefacts auditables} — Modèles XGBoost en JSON, métadonnées, calibration et prévisions archivées
+\item \textbf{Bascule sans interruption} — Rechargement immédiat du nouveau modèle, sans redémarrage de l'API
+\end{itemize}
+\vspace{0.3cm}
+
+\subsection*{Innovation Technique}
+
+\textbf{Points distinctifs d'OliveVolt :}
+\begin{itemize}
+\item \textbf{Approche hybride unique} — Seul système tunisien combinant règles calibrées ET machine learning avec bascule automatique
+\item \textbf{MLOps natif} — Réentraînement sans intervention humaine (innovation clé pour PME)
+\item \textbf{Scraping intelligent} — Première collecte structurée des données STEG avec support arabe avancé
+\item \textbf{Coût zéro API} — Utilisation exclusive de sources publiques gratuites
+\end{itemize}
+
+\vspace{0.15cm}
+
+
+
+\end{document}

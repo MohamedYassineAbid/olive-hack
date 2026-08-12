@@ -1,11 +1,11 @@
 services:
 
-  # ── Risk API + ML model ───────────────────────────────────────────────
-  risk-api:
+  # ── OliveVolt Risk API + ML model ─────────────────────────────────────
+  olivevolt-api:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    container_name: risk-api
+    container_name: olivevolt-api
     restart: unless-stopped
     ports:
       - "8000:8000"
@@ -30,7 +30,7 @@ services:
   # ── n8n workflow engine ───────────────────────────────────────────────
   n8n:
     image: n8nio/n8n:latest
-    container_name: n8n
+    container_name: olivevolt-n8n
     restart: unless-stopped
     ports:
       - "5678:5678"
@@ -45,10 +45,10 @@ services:
     volumes:
       - n8n_data:/home/node/.n8n
     extra_hosts:
-      # Allows n8n container to reach the risk-api on the host network
+      # Allows n8n container to reach the olivevolt-api on the host network
       - "host.docker.internal:host-gateway"
     depends_on:
-      risk-api:
+      olivevolt-api:
         condition: service_healthy
 
 volumes:
